@@ -18,3 +18,4 @@ or process that can generate XML can be used. The templates are a way to organiz
 XML. 
 
 Version 1.0 Aug 31, 2017
+John Mott
