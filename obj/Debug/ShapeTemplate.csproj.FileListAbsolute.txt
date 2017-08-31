@@ -1,0 +1,5 @@
+C:\mott\projects\personal\DirectX\ShapeTemplate\bin\Debug\ShapeTemplate.dll
+C:\mott\projects\personal\DirectX\ShapeTemplate\bin\Debug\ShapeTemplate.pdb
+C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.csprojResolveAssemblyReference.cache
+C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.dll
+C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.pdb
