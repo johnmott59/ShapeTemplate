@@ -17,6 +17,8 @@ Because the interface to Meshola API is XML this library is not required, nor is
 or process that can generate XML can be used. The templates are a way to organize and define a complex shape that has properties that are modifiable and generate the correct
 XML. 
 
-Version 1.0 Aug 31, 2017
+This dll is also available on nuget at Meshola.Library.ShapeTemplateLib 
+
+Version 1.1 Sep 11, 2017
 
 John Mott
