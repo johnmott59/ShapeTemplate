@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ShapeTemplate
+namespace ShapeTemplateLib
 {
-    public class Point3D : IXElement
+    public class Point3D : ILoadAndSaveProperties
     {
+        public Point3D()
+        {
+
+        }
         public Point3D(float X, float Y, float Z)
         {
             this.X = X;
@@ -19,14 +23,31 @@ namespace ShapeTemplate
         public float Y { get; set; }
         public float Z { get; set; }
 
-        public XElement GetXElement()
+        public XElement GetProperties()
         {
             return new XElement("point", new XAttribute("x", this.X), new XAttribute("y", this.Y), new XAttribute("z", this.Z));
         }
 
-        public XElement GetXElement(string ParentName)
+        public XElement GetProperties(string ParentName)
         {
             return new XElement(ParentName, new XAttribute("x", this.X), new XAttribute("y", this.Y), new XAttribute("z", this.Z));
+        }
+
+        public bool LoadProperties(XElement ele, out string message)
+        {
+            message = "OK";
+
+            float value = 0;
+            if (!Utilities.GetFloatAttribute(ele, "x", out value, out message)) return false;
+            this.X = value;
+
+            if (!Utilities.GetFloatAttribute(ele, "y", out value, out message)) return false;
+            this.Y = value;
+
+            if (!Utilities.GetFloatAttribute(ele, "z", out value, out message)) return false;
+            this.Z = value;
+
+            return true;
         }
     }
 

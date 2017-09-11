@@ -5,14 +5,26 @@ using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShapeTemplate
+namespace ShapeTemplateLib
 {
-    public class MeshTemplateRoot : IMeshTemplate
+    public class TemplateRoot : ILoadAndSaveProperties
     {
-        public virtual XElement GetElement()
+        public virtual XElement GetProperties()
         {
             return new XElement("root");
         }
+        
+        public virtual bool LoadProperties(XElement ele, out string message)
+        {
+            message = "OK";
+            return true;
+        }
+
+        public virtual XElement Compile()
+        {
+            return new XElement("root");
+        }
+
     }
 
 }
