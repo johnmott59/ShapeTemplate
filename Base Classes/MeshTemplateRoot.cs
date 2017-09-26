@@ -9,7 +9,7 @@ namespace ShapeTemplateLib
 {
     public class TemplateRoot : ILoadAndSaveProperties
     {
-        public virtual XElement GetProperties()
+        public virtual XElement GetProperties(string PropertyName="")
         {
             return new XElement("root");
         }

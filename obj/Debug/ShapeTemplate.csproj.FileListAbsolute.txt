@@ -3,3 +3,8 @@ C:\mott\projects\personal\DirectX\ShapeTemplate\bin\Debug\ShapeTemplate.pdb
 C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.csprojResolveAssemblyReference.cache
 C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.dll
 C:\mott\projects\personal\DirectX\ShapeTemplate\obj\Debug\ShapeTemplate.pdb
+C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplate.csprojResolveAssemblyReference.cache
+C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplate.dll
+C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplate.pdb
+C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\bin\Debug\ShapeTemplate.dll
+C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\bin\Debug\ShapeTemplate.pdb

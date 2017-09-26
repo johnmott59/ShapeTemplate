@@ -8,15 +8,75 @@ using ShapeTemplateLib.BasicShapes;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public class StraightStairs : TemplateRoot
+    /// <summary>
+    /// The straight stairs template is a set of stairs. 
+    /// </summary>
+    [HelpItem(eItemFlavor.Template,"straightstairs")]
+    public  partial class StraightStairs : TemplateRoot
     {
-        public int VerticalDistanceBetweenSteps { get; set; } = 10;
+        /// <summary>
+        /// The verticaldistance describes how they are placed vertically
+        /// </summary>
+        [HelpProperty(SampleValue ="10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
+        public int VerticalDistance { get; set; } = 10;
+
+        /// <summary>
+        /// The horizontaldistance describes how they are placed horizontally
+        /// </summary>
+        [HelpProperty( SampleValue = "10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
+        public int HorizontalDistance { get; set; } = 10;
+
+        /// <summary>
+        /// The lateraldistance describes how the stairs drift sideways 
+        /// </summary>
+        [HelpProperty(SampleValue = "10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
+        public int LateralDistance { get; set; } = 0;
+
+        /// <summary>
+        /// staircount is the count of stairs
+        /// </summary>
+        [HelpProperty(SampleValue ="10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public int StairCount { get; set; } = 10;
+
+        /// <summary>
+        /// width is the width of stairs
+        /// </summary>
+        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public int Width { get; set; } = 30;
+
+        /// <summary>
+        /// rise is the how tall each stair is 
+        /// </summary>
+        [HelpProperty(SampleValue = "10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public int Rise { get; set; } = 10;
+
+        /// <summary>
+        /// run is the length of the stair 
+        /// </summary>
+        [HelpProperty(SampleValue = "10", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public int Run { get; set; } = 10;
+
+        /// <summary>
+        /// The left and right side of the stairs have a texture, and there is a texture for the steps
+        /// leftsidetexture is the name of the texture file for the left side
+        /// </summary>
+        [HelpProperty( SampleValue = "leftside.png", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public string LeftSideTexture { get; set; } = "";
+
+        /// <summary>
+        /// The left and right side of the stairs have a texture, and there is a texture for the steps
+        /// rightsidetexture is the name of the texture file for the left side
+        //// 1. its an inline attrobute of its parent
+        /// 2. its an attribute of node with named 'property'
+        /// </summary>
+        [HelpProperty( SampleValue = "leftside.png", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public string RightSideTexture { get; set; } = "";
+
+        /// <summary>
+        /// The left and right side of the stairs have a texture, and there is a texture for the steps
+        /// stairtexture is the name of the texture file for the left side
+        /// </summary>
+        [HelpProperty(SampleValue = "stairtexture", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public string StairTexture { get; set; } = "";
 
 
@@ -26,27 +86,32 @@ namespace ShapeTemplateLib.Templates.User0
 
             for (int i = 0; i < StairCount; i++)
             {
-                root.Add(SingleStair(new Point3D(i * 10, i * VerticalDistanceBetweenSteps, 0), Width, Rise, Run));
+                root.Add(SingleStair(new Point3D(i * HorizontalDistance, i * VerticalDistance, i* LateralDistance), Width, Rise, Run));
             }
 
             return root;
         }
-        public override XElement GetProperties()
+        public override XElement GetProperties(string PropertyName="")
         {
-            XElement root = new XElement("straightstairs",
+            XElement root = new XElement("template",
+                new XAttribute("prop",PropertyName),
                 new XAttribute("user","User0"),
+                new XAttribute("name","straightstairs"),
 
-            new XElement("property", new XAttribute(nameof(VerticalDistanceBetweenSteps).ToLower(), VerticalDistanceBetweenSteps)),
+            new XElement("property", new XAttribute(nameof(VerticalDistance).ToLower(), VerticalDistance)),
+            new XElement("property", new XAttribute(nameof(HorizontalDistance).ToLower(), HorizontalDistance)),
+            new XElement("property", new XAttribute(nameof(LateralDistance).ToLower(), LateralDistance)),
             new XElement("property", new XAttribute(nameof(StairCount).ToLower(), StairCount)),
             new XElement("property", new XAttribute(nameof(Width).ToLower(), Width)),
             new XElement("property", new XAttribute(nameof(Rise).ToLower(), Rise)),
-            new XElement("property", new XAttribute(nameof(Run),Run)),
+            new XElement("property", new XAttribute(nameof(Run).ToLower(),Run)),
             new XElement("property", new XAttribute(nameof(LeftSideTexture).ToLower(), LeftSideTexture)),
             new XElement("property", new XAttribute(nameof(RightSideTexture).ToLower(), RightSideTexture)),
-            new XElement("property", new XAttribute(nameof(StairTexture), StairTexture)));
+            new XElement("property", new XAttribute(nameof(StairTexture).ToLower(), StairTexture)));
 
             return root;
         }
+
 
         public override bool LoadProperties(XElement ele, out string message)
         {
@@ -55,52 +120,82 @@ namespace ShapeTemplateLib.Templates.User0
 
             message = "OK";
 
-            foreach (XElement prop in ele.Elements("property"))
+            // find each property
+            XAttribute oAtt = Utilities.GetPropertyAttribute(ele,nameof(VerticalDistance));
+            if (oAtt != null)
             {
-                switch (prop.Name.LocalName)
-                {
-                    case nameof(VerticalDistanceBetweenSteps):
-                        if (!Utilities.GetIntAttribute(prop, nameof(VerticalDistanceBetweenSteps), out iTmp, out message)) return false;
-                        VerticalDistanceBetweenSteps = iTmp;
-                        break;
-                    case nameof(StairCount):
-                        if (!Utilities.GetIntAttribute(prop, nameof(StairCount), out iTmp, out message)) return false;
-                        StairCount = iTmp;
-                        break;
-                    case nameof(Width):
-                        if (!Utilities.GetIntAttribute(prop, nameof(Width), out iTmp, out message)) return false;
-                        Width = iTmp;
-                        break;
-                    case nameof(Rise):
-                        if (!Utilities.GetIntAttribute(prop, nameof(Rise), out iTmp, out message)) return false;
-                        Rise = iTmp;
-                        break;
-                    case nameof(Run):
-                        if (!Utilities.GetIntAttribute(prop, nameof(Run), out iTmp, out message)) return false;
-                        Run = iTmp;
-                        break;
-                    case nameof(LeftSideTexture):
-                        if (!Utilities.GetStringAttribute(prop, nameof(LeftSideTexture), out sTmp, out message)) return false;
-                        LeftSideTexture = sTmp;
-                        break;
-                    case nameof(RightSideTexture):
-                        if (!Utilities.GetStringAttribute(prop, nameof(RightSideTexture), out sTmp, out message)) return false;
-                        RightSideTexture = sTmp;
-                        break;
-                    case nameof(StairTexture):
-                        if (!Utilities.GetStringAttribute(prop, nameof(StairTexture), out sTmp, out message)) return false;
-                        StairTexture = sTmp;
-                        break;
-                }
+                if (!Utilities.GetIntFromAttribute(oAtt,  out iTmp, out message)) return false;
+                VerticalDistance = iTmp;
             }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(HorizontalDistance));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                HorizontalDistance = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(LateralDistance));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                LateralDistance = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(StairCount));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                StairCount = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(Width));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                Width = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(Rise));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                Rise = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(Run));
+            if (oAtt != null)
+            {
+                if (!Utilities.GetIntFromAttribute(oAtt, out iTmp, out message)) return false;
+                Run = iTmp;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(LeftSideTexture));
+            if (oAtt != null)
+            {
+                LeftSideTexture = oAtt.Value;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(RightSideTexture));
+            if (oAtt != null)
+            {
+                RightSideTexture = oAtt.Value;
+            }
+
+            oAtt = Utilities.GetPropertyAttribute(ele, nameof(StairTexture));
+            if (oAtt != null)
+            {
+                StairTexture = oAtt.Value;
+            }
+
             return true;
         }
 
         protected XElement SingleStair(Point3D BasePoint, int width = 30, int rise = 10, int run = 10)
         {
             Panel sp = new Panel();
-            sp.FrontMesh.MeshDisplayProperties.Color = "#DBDBEF";
-            sp.FrontMesh.MeshDisplayProperties.Name = "stairfront";
+            sp.FrontMesh.MeshDisplayProperties.MaterialColor = "#DBDBEF";
+            sp.FrontMesh.MeshDisplayProperties.MaterialName = "stairfront";
 
             sp.FrontMesh.Boundary = new BoundaryLineSegment()
             {
@@ -113,8 +208,8 @@ namespace ShapeTemplateLib.Templates.User0
             }
             };
 
-            sp.BackMesh.MeshDisplayProperties.Color = "#DBDBEF";
-            sp.BackMesh.MeshDisplayProperties.Name = "stairback";
+            sp.BackMesh.MeshDisplayProperties.MaterialColor = "#DBDBEF";
+            sp.BackMesh.MeshDisplayProperties.MaterialName = "stairback";
 
             sp.BackMesh.Boundary = new BoundaryLineSegment()
             {
@@ -127,9 +222,9 @@ namespace ShapeTemplateLib.Templates.User0
             }
             };
 
-            sp.ConnectorDisplayProperties.Color = "#FFFFFF";
-            sp.ConnectorDisplayProperties.Name = "StairConnector";
-            sp.ConnectorDisplayProperties.TextureFile = "woodfloor.png";
+            sp.ConnectorDisplayProperties.MaterialColor = "#FFFFFF";
+            sp.ConnectorDisplayProperties.MaterialName = "StairConnector";
+            sp.ConnectorDisplayProperties.TextureFileName = "woodfloor.png";
 
             sp.ConnectorSegmentVisible = new List<bool>() { true, true, true, true };
 

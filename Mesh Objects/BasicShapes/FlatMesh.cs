@@ -10,27 +10,62 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib.BasicShapes
 {
-    /*
-     * A panel has a boundary, mesh properties, an relative XAxis, an offset, and possibly holes.
-     * For purposes of placing holes a panel is defined in the XY plane. The winding of the boundary determines 
-     * the relative Z axis, counter clockwise winding indicates that Z is 'out' or towards the viewer looking at the 
-     * panel.
-     */
-    public partial class FlatMesh : ILoadAndSaveProperties
+    /// <summary>
+    /// A FlatMesh is a basic shape, and is simply a closed non-intersecting polygon. It has a boundary, mesh properties, 
+    /// a relative XAxis, an offset, and possibly holes.
+    /// 
+    /// For purposes of placing holes a panel is defined in the XY plane.The winding of the boundary determines
+    /// the relative Z axis, counter clockwise winding indicates that Z is 'out' or towards the viewer looking at the
+    /// panel.
+    /// </summary>
+    [HelpItem(eItemFlavor.BasicShape,"flatmesh")]
+    public partial class FlatMesh :  ILoadAndSaveProperties
     {
+        /// <summary>
+        /// The boundary property is used to define the outline of the FlatMesh. Use a derived class BoundaryRectangle,
+        /// BoundaryEllipse and BoundaryLineSegment to instantiate a boundary. 
+        /// </summary>
+        [HelpProperty]
         public BoundaryRoot Boundary { get; set; } = new BoundaryRectangle() { Height = 20, Width = 20 };
+       
+        /// <summary>
+        /// The Mesh display properties contain the color, visibility and name of a texture file
+        /// </summary>
+        /// <see cref="MeshDisplayProperties"/>
+        [HelpProperty("displayproperties")]
         public MeshDisplayProperties MeshDisplayProperties { get; set; } = new MeshDisplayProperties();
 
+        /// <summary>
+        /// The offset field for a FlatMesh describes how the 'origin' of the mesh is offset in 3D space. You only
+        /// have to specificy it if you are placing holes in the mesh and its not located at the origin in the XY plane.
+        /// 
+        /// Holes are placed in a FlatMesh relative to an origin (0,0,0) with the mesh in the cartesian XY. 
+        /// You face the mesh in the XY plane, Y is to the right and Z comes out at you.
+        /// </summary>
+        /// <see cref="Point3D"/>
+        [HelpProperty]
         public Point3D Offset { get; set; } = new Point3D(0, 0, 0);
+
+        /// <summary>
+        /// The xaxis field for a FlatMesh describes how the X axis of the mesh is oriented. You only
+        /// have to specificy it if you are placing holes in the mesh and its not located at the origin in the XY plane.
+        /// 
+        /// Holes are placed in a FlatMesh relative to an origin (0,0,0) with the mesh in the cartesian XY. 
+        /// You face the mesh in the XY plane, Y is to the right and Z comes out at you.
+        /// </summary>
+        /// <see cref="Vector3D"/>
+        [HelpProperty]
         public Vector3D XAxis { get; set; } = new Vector3D(1, 0, 0);
 
-        // List of holes
+        /// <summary>
+        /// A flat mesh can have a list of holes. Each hole has an offset and a boundary. Holes are defined assuming
+        /// that the mesh is positioned in the XY plane with Z facing forward so you visualize 'looking' at the mesh face on
+        /// and positioning the hole right (+x), left (-x), up (+y) and down (-y). The boundary for the holes should be wound
+        /// counter clockwise on the face of the mesh, so a triangle might be (0,0) -> (50,0) -> (25,25)
+        /// </summary>
+        [HelpProperty]
         public List<Hole> HoleList { get; set; } = new List<Hole>();
 
-        public XElement GetProperties()
-        {
-            throw new Exception("Not Implemented");
-        }
 
         // For a basic shape the compile step is the same as getting properties
         public XElement Compile()
@@ -44,40 +79,42 @@ namespace ShapeTemplateLib.BasicShapes
             return GetProperties(ParentName);
         }
 
-        public XElement GetProperties(string parentName)
+        public XElement GetProperties(string PropertyName = "")
         {
-            XElement parent = new XElement(parentName);
-            parent.Add(Boundary.GetProperties());
-            if (MeshDisplayProperties != null) parent.Add(MeshDisplayProperties.GetProperties());
+            XElement flatmesh = new XElement("flatmesh", new XAttribute("prop", PropertyName));
+
+            flatmesh.Add(Boundary.GetProperties("boundary"));
+
+            if (MeshDisplayProperties != null) flatmesh.Add(MeshDisplayProperties.GetProperties("meshdisplayproperties"));
             if (Offset == null)
             {
                 // add a default value
-                parent.Add(new Point3D(0, 0, 0).GetProperties());
+                flatmesh.Add(new Point3D(0, 0, 0).GetProperties("offset"));
             } else
             {
-                parent.Add(Offset.GetProperties("offset"));
+                flatmesh.Add(Offset.GetProperties("offset"));
             }
 
             if (XAxis == null)
             {
                 // Add a default value
-                parent.Add(new Vector3D(1f, 0f, 0f).GetProperties("xaxis"));
+                flatmesh.Add(new Vector3D(1f, 0f, 0f).GetProperties("xaxis"));
             } else
             {
-                parent.Add(XAxis.GetProperties("xaxis"));
+                flatmesh.Add(XAxis.GetProperties("xaxis"));
             }
-          
+
             /*
              * Add the list of panel holes
              */
-            XElement xHole = new XElement("holelist");
-            parent.Add(xHole);
+            XElement xHole = new XElement("holelist", new XAttribute("prop","holelist"));
+            flatmesh.Add(xHole);
             foreach (Hole h in HoleList)
             {
                 xHole.Add(h.GetProperties());
             }
 
-            return parent;
+            return flatmesh;
         }
 
         public bool LoadProperties(XElement ele, out string message)
@@ -88,31 +125,37 @@ namespace ShapeTemplateLib.BasicShapes
                 return false;
             }
 
+            XElement xBoundary = Utilities.GetNamedElementWithPropAttribute(ele, "boundary");
             message = "OK";
             BoundaryRoot b;
-            if (!BoundaryRoot.LoadXElement(ele.Element("boundary"), out b, out message)) return false;
+            if (!BoundaryRoot.LoadXElement(xBoundary, out b, out message)) return false;
             this.Boundary = b;
 
-            if (ele.Element("displayproperties") != null)
+            XElement xDisplayProperties = Utilities.GetNamedElementWithPropAttribute(ele, "meshdisplayproperties");
+            if (xDisplayProperties != null)
             {
-                if (!MeshDisplayProperties.LoadProperties(ele.Element("displayproperties"), out message)) return false;
+                if (!MeshDisplayProperties.LoadProperties(xDisplayProperties, out message)) return false;
             }
 
-            if (ele.Element("offset") != null)
+            XElement xOffset = Utilities.GetNamedElementWithPropAttribute(ele,"point3d", "offset");
+            if (xOffset != null)
             {
-                if (!Offset.LoadProperties(ele.Element("offset"), out message)) return false;
+                if (!Offset.LoadProperties(xOffset, out message)) return false;
             }
 
-            if (ele.Element("xaxis") != null)
+            XElement xXAxis = Utilities.GetNamedElementWithPropAttribute(ele, "vector3d", "xaxis");
+            if (xXAxis != null)
             {
-                if (!XAxis.LoadProperties(ele.Element("xaxis"), out message)) return false;
+                if (!XAxis.LoadProperties(xXAxis, out message)) return false;
             }
+
+            XElement xHoleList = Utilities.GetNamedElementWithPropAttribute(ele, "holelist");
             /*
              * If there are holes, add them
              */
-            if (ele.Element("holelist") != null)
+            if (xHoleList != null)
             {
-                foreach (XElement xh in ele.Element("holelist").Elements("hole"))
+                foreach (XElement xh in xHoleList.Elements("hole"))
                 {
                     Hole h = new Hole();
                     if (!h.LoadProperties(xh, out message)) return false;

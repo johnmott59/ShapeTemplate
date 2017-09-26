@@ -9,6 +9,35 @@ namespace ShapeTemplateLib
 {
    public class Utilities
     {
+        /// <summary>
+        /// Return the named attribute of the property child. This is used to retrieve properties for templates
+        /// of the form <property fieldname="value"/> where 'fieldname' is a property of the template class
+        /// </summary>
+        /// <param name="ele"></param>
+        /// <param name="propvalue"></param>
+        /// <returns></returns>
+        public static XAttribute GetPropertyAttribute(XElement ele, string propvalue)
+        {
+            // Locate the element with this attribute
+
+            XElement p = ele.Elements("property").Where(m => m.FirstAttribute.Name == propvalue.ToLower()).FirstOrDefault();
+
+            if (p == null) return null;
+
+            return p.FirstAttribute;
+
+        }
+        public static XElement GetNamedElementWithPropAttribute(XElement ele, string ElementName)
+        {
+            return GetNamedElementWithPropAttribute(ele, ElementName, ElementName);
+        }
+
+        public static XElement GetNamedElementWithPropAttribute(XElement ele, string ElementName,string PropValue)
+        {
+            return ele.Elements(ElementName)
+                .FirstOrDefault(el => el.Attribute("prop") != null && el.Attribute("prop").Value == PropValue);
+        }
+
         public static bool GetChildElement(XElement parent,string childname,out XElement ele,out string message)
         {
             message = "OK";
@@ -52,6 +81,27 @@ namespace ShapeTemplateLib
             return true;
         }
 
+        public static bool GetIntFromAttribute(XAttribute oAtt, out int value, out string message)
+        {
+            message = "OK";
+            value = 0;
+
+            string s = oAtt.Value;
+
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                message = $"Expected int, found empty attribute {oAtt.Name}";
+                return false;
+            }
+
+            if (!int.TryParse(s, out value))
+            {
+                message = $"Invalid int value for attribute {oAtt.Name}";
+                return false;
+            }
+
+            return true;
+        }
 
         public static bool GetIntAttribute(XElement ele, string attributeName, out int value, out string message)
         {

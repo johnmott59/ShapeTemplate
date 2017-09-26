@@ -11,18 +11,37 @@ namespace ShapeTemplateLib.BasicShapes
 {
     public partial class Panel 
     {
-        // A connected hole is composed of two definitions, one for the front and one for the back, and the mesh display 
-        // properties for the connector
-
+        /// <summary>
+        /// A connected hole is part of a panel. It is composed of two definitions, one for the front and one 
+        /// for the back, and the mesh display properties for the connecting mesh
+        /// </summary>
+        [HelpItem(eItemFlavor.Data,"connectedhole")]
         public class ConnectedHole : ILoadAndSaveProperties
         {
+            /// <summary>
+            /// This field contains the ID value of the hole on the front of the mesh to use to connect
+            /// </summary>
+            [HelpProperty(XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent, SampleValue ="fmdoor")]
             public string FrontID { get; set; }
+
+            /// <summary>
+            /// This field contains the ID value of the hole on the back of the mesh to use to connect
+            /// </summary>
+            [HelpProperty( XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent, SampleValue = "bmdoor")]
             public string BackID { get; set; }
+
+            /// <summary>
+            /// These are the display properties of the mesh connecting the two holes
+            /// </summary>
+            [HelpProperty]
             public MeshDisplayProperties DisplayProperties { get; set; } = new MeshDisplayProperties();
 
-            public XElement GetProperties()
+            public XElement GetProperties(string PropertyName="")
             {
-                return new XElement("connectedhole", new XAttribute("frontid", this.FrontID), new XAttribute("backid", this.BackID),
+                return new XElement("connectedhole", 
+                    new XAttribute("prop",PropertyName),
+                    new XAttribute(nameof(FrontID).ToLower(), FrontID),
+                    new XAttribute(nameof(BackID).ToLower(), BackID),
                     DisplayProperties.GetProperties());
             }
 
@@ -30,34 +49,34 @@ namespace ShapeTemplateLib.BasicShapes
             {
                 Message = "OK";
 
-                if (ele.Attribute("frontid") == null)
+                if (ele.Attribute(nameof(FrontID).ToLower()) == null)
                 {
-                    Message = "frontid required for connectedhole";
+                    Message = nameof(FrontID).ToLower() + " required for connectedhole";
                     return false;
                 }
-                this.FrontID = ele.Attribute("frontid").Value;
+                this.FrontID = ele.Attribute(nameof(FrontID).ToLower()).Value;
                 if (String.IsNullOrEmpty(this.FrontID))
                 {
-                    Message = "frontid requires a value";
+                    Message = nameof(FrontID).ToLower() + " requires a value";
                     return false;
                 }
 
-                if (ele.Attribute("backid") == null)
+                if (ele.Attribute(nameof(BackID).ToLower()) == null)
                 {
-                    Message = "backid required for connectedhole";
+                    Message = nameof(BackID).ToLower() + " required for connectedhole";
                     return false;
                 }
-                this.BackID = ele.Attribute("backid").Value;
+                this.BackID = ele.Attribute(nameof(BackID).ToLower()).Value;
                 if (String.IsNullOrEmpty(this.FrontID))
                 {
-                    Message = "backid requires a value";
+                    Message = nameof(BackID).ToLower() + " requires a value";
                     return false;
                 }
 
-                if (ele.Element("displayproperties") != null)
+                if (ele.Element(nameof(DisplayProperties).ToLower()) != null)
                 {
                     this.DisplayProperties = new MeshDisplayProperties();
-                    if (!DisplayProperties.LoadProperties(ele.Element("displayproperties"), out Message)) return false;
+                    if (!DisplayProperties.LoadProperties(ele.Element(nameof(DisplayProperties).ToLower()), out Message)) return false;
                 }
 
                 return true;

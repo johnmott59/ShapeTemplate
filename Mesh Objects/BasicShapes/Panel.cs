@@ -9,39 +9,61 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib.BasicShapes
 {
+    /// <summary>
+    /// The Panel is a basic shape consisting of two FlatMesh shapes that are a 'front' and 'back' and that are 
+    /// connected via a connector mesh. The front and back meshes can have holes that don't connect to each other,
+    /// and there can be holes that connect the front and back, so its a very versatile shape.
+    /// </summary>
+    [HelpItem(eItemFlavor.BasicShape,"panel")]
     public partial class Panel : ILoadAndSaveProperties, ICompile
     {
+        [HelpProperty("frontmesh")]
         public FlatMesh FrontMesh { get; set; } = new FlatMesh();
+        [HelpProperty("backmesh")]
         public FlatMesh BackMesh { get; set; } = new FlatMesh();
 
+        /// <summary>
+        /// The connector display properties has the display properties for the mesh that connectes the front and back
+        /// </summary>
+        [HelpProperty("")]
         public MeshDisplayProperties ConnectorDisplayProperties { get; set; } = new MeshDisplayProperties();
+
+        /// <summary>
+        ///  You can turn on or off individual segments of the connection mesh for different effects
+        /// </summary>
+        [HelpProperty("")]
         public List<bool> ConnectorSegmentVisible { get; set; } = new List<bool>();
 
         // List of the connections for holes from front to back
+        [HelpProperty("connectedholelist")]
         public List<Panel.ConnectedHole> ConnectedHoleList { get; set; } = new List<ConnectedHole>();
 
         public bool LoadProperties(XElement ele, out string message)
         {
             message = "OK";
-
             XElement xp;
-            if (!FrontMesh.LoadProperties(ele.Element("frontmesh"), out message)) return false;
 
-            if (!BackMesh.LoadProperties(ele.Element("backmesh"), out message)) return false;
+            XElement xFrontMesh = Utilities.GetNamedElementWithPropAttribute(ele, "flatmesh", "FrontMesh");          
+            if (!FrontMesh.LoadProperties(xFrontMesh, out message)) return false;
 
-            // the connector is optional
-            xp = ele.Element("connector");
-            if (xp != null)
+            XElement xBackMesh = Utilities.GetNamedElementWithPropAttribute(ele, "flatmesh", "BackMesh");
+            if (!BackMesh.LoadProperties(xBackMesh, out message)) return false;
+            /*
+             * The connector segment is optional
+             */
+            XElement xDisplayProperties = Utilities.GetNamedElementWithPropAttribute(ele, "meshdisplayproperties", "ConnectorDisplayProperties");
+            // The display properties are optional
+            if (xDisplayProperties != null)
             {
-                // The display properties are optional
-                if (xp.Element("displayproperties") != null)
-                {
-                    if (!ConnectorDisplayProperties.LoadProperties(xp.Element("displayproperties"), out message)) return false;
-                }
-                /*
-                 * Get the value, should be a series of 0 and 1
-                 */
-                string value = xp.Value.Trim();
+                if (!ConnectorDisplayProperties.LoadProperties(xDisplayProperties, out message)) return false;
+            }
+            /*
+             * There is an optional list of segment visibility variables
+             */
+            XElement xVisibleProperties = ele.Element("connectorsegmentvisible");
+            if (xVisibleProperties != null)
+            {
+                string value = xVisibleProperties.Value.Trim();
 
                 if (!String.IsNullOrEmpty(value))
                 {
@@ -63,12 +85,14 @@ namespace ShapeTemplateLib.BasicShapes
                     }
                 }
             }
+
             /*
              * If there are holes, add them
              */
-            if (ele.Element("connectedholelist") != null)
+            XElement xConnectedHoles = Utilities.GetNamedElementWithPropAttribute(ele, "holelist","ConnectedHoleList");
+            if (xConnectedHoles != null)
             {
-                foreach (XElement xh in ele.Element("connectedholelist").Elements("connectedhole"))
+                foreach (XElement xh in xConnectedHoles.Elements("connectedhole"))
                 {
                     ConnectedHole h = new ConnectedHole();
                     if (!h.LoadProperties(xh, out message)) return false;
@@ -93,16 +117,16 @@ namespace ShapeTemplateLib.BasicShapes
             return true;
         }
 
-        public XElement GetProperties()
+        public XElement GetProperties(string PropertyName="")
         {
-            XElement sp = new XElement("panel");
+            XElement sp = new XElement("panel",new XAttribute("prop",PropertyName));
 
-            sp.Add(FrontMesh.GetProperties("frontmesh"));
-            sp.Add(BackMesh.GetProperties("backmesh"));
+            sp.Add(FrontMesh.GetProperties("FrontMesh"));
+            sp.Add(BackMesh.GetProperties("BackMesh"));
 
-            XElement conn = new XElement("connector");
-            sp.Add(conn);
-            conn.Add(ConnectorDisplayProperties.GetProperties());
+
+            sp.Add(ConnectorDisplayProperties.GetProperties("ConnectorDisplayProperties"));
+
             string bl = "";
             string comma = "";
             foreach (bool b in ConnectorSegmentVisible)
@@ -110,10 +134,14 @@ namespace ShapeTemplateLib.BasicShapes
                 bl += comma + (b ? "1" : "0");
                 comma = ",";
             }
-            conn.Add(bl);
+            /*
+             * Add in the connector segment visible list
+             */
+            sp.Add(new XElement("connectorsegmentvisible", bl));
+         
 
             // Save the connected holes
-            XElement xHole = new XElement("connectedholelist");
+            XElement xHole = new XElement("holelist",new XAttribute("prop","ConnectedHoleList"));
             sp.Add(xHole);
             foreach(ConnectedHole h in ConnectedHoleList)
             {
