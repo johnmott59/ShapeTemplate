@@ -19,6 +19,6 @@ XML.
 
 This dll is also available on nuget at Meshola.Library.ShapeTemplateLib 
 
-Version 1.1 Sep 11, 2017
+Version 1.2 Sep 25, 2017
 
 John Mott
