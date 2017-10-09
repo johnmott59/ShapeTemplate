@@ -7,10 +7,11 @@
     <ProjectGuid>{6B5A4857-A7F5-4213-9A92-2058F768831B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShapeTemplate</RootNamespace>
-    <AssemblyName>ShapeTemplate</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>ShapeTemplateLib</RootNamespace>
+    <AssemblyName>ShapeTemplateLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ShapeTemplateLib.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,10 +72,7 @@
     <Compile Include="Mesh Objects\BasicShapes\Panel.cs" />
     <Compile Include="Mesh Objects\BasicShapes\Panel.GetSampleList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Base Classes\IMeshTemplate.cs" />
-    <Compile Include="Base Classes\IXElement.cs" />
     <Compile Include="Base Classes\MeshDisplayProperties.cs" />
-    <Compile Include="Base Classes\MeshObjectRoot.cs" />
     <Compile Include="Base Classes\MeshTemplateRoot.cs" />
     <Compile Include="Base Classes\Point3D.cs" />
     <Compile Include="Base Classes\Vector3D.cs" />

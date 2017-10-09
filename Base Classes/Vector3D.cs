@@ -24,7 +24,7 @@ namespace ShapeTemplateLib
         public new  XElement GetProperties(string PropertyName="")
         {
             return new XElement("vector3d",
-                new XAttribute("name", PropertyName),
+                new XAttribute("prop", PropertyName),
                 new XAttribute("x", this.X),
                 new XAttribute("y", this.Y),
                 new XAttribute("z", this.Z));
