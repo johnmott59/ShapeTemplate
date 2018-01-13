@@ -8,4 +8,3 @@ C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\bin\Debug\ShapeTemp
 C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\bin\Debug\ShapeTemplateLib.pdb
 C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplateLib.dll
 C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplateLib.pdb
-C:\mott\projects\personal\DirectX\ShapeTemplatelib.git\trunk\obj\Debug\ShapeTemplate.csprojResolveAssemblyReference.cache

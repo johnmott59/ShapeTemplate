@@ -41,7 +41,6 @@ namespace ShapeTemplateLib.BasicShapes
         public bool LoadProperties(XElement ele, out string message)
         {
             message = "OK";
-            XElement xp;
 
             XElement xFrontMesh = Utilities.GetNamedElementWithPropAttribute(ele, "flatmesh", "FrontMesh");          
             if (!FrontMesh.LoadProperties(xFrontMesh, out message)) return false;

@@ -66,8 +66,8 @@ namespace ShapeTemplateLib.Templates.User0
         /// <summary>
         /// The left and right side of the stairs have a texture, and there is a texture for the steps
         /// rightsidetexture is the name of the texture file for the left side
-        //// 1. its an inline attrobute of its parent
-        /// 2. its an attribute of node with named 'property'
+        /// 1. its an inline attrobute of its parent
+        ///  2. its an attribute of node with named 'property'
         /// </summary>
         [HelpProperty( SampleValue = "leftside.png", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
         public string RightSideTexture { get; set; } = "";
@@ -116,8 +116,6 @@ namespace ShapeTemplateLib.Templates.User0
         public override bool LoadProperties(XElement ele, out string message)
         {
             int iTmp;
-            string sTmp;
-
             message = "OK";
 
             // find each property
@@ -197,9 +195,9 @@ namespace ShapeTemplateLib.Templates.User0
             sp.FrontMesh.MeshDisplayProperties.MaterialColor = "#DBDBEF";
             sp.FrontMesh.MeshDisplayProperties.MaterialName = "stairfront";
 
-            sp.FrontMesh.Boundary = new BoundaryLineSegment()
+            sp.FrontMesh.Boundary = new BoundaryPolygon()
             {
-                PointList = {
+                PointList = new Point3D[] {
                 new Point3D(BasePoint.X, BasePoint.Y, BasePoint.Z),
                 new Point3D(BasePoint.X, BasePoint.Y + rise, BasePoint.Z),
                 new Point3D(BasePoint.X + run, BasePoint.Y + rise, BasePoint.Z),
@@ -211,9 +209,9 @@ namespace ShapeTemplateLib.Templates.User0
             sp.BackMesh.MeshDisplayProperties.MaterialColor = "#DBDBEF";
             sp.BackMesh.MeshDisplayProperties.MaterialName = "stairback";
 
-            sp.BackMesh.Boundary = new BoundaryLineSegment()
+            sp.BackMesh.Boundary = new BoundaryPolygon()
             {
-                PointList = {
+                PointList = new Point3D[] {
                 new Point3D(BasePoint.X, BasePoint.Y, BasePoint.Z - 30),
                 new Point3D(BasePoint.X, BasePoint.Y + rise, BasePoint.Z - 30),
                 new Point3D(BasePoint.X + run, BasePoint.Y + rise, BasePoint.Z - 30),

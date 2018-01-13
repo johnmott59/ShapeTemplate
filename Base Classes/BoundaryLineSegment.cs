@@ -17,14 +17,8 @@ namespace ShapeTemplateLib
     /// (0,0) -> (50,0) -> (25,25)
     /// </summary>
     [HelpItem(eItemFlavor.Data, "linesegment")]
-    public class BoundaryLineSegment : BoundaryRoot
+    public partial class BoundaryPolygon : BoundaryRoot
     {
-        /// <summary>
-        /// List of points for the boundarylinesegment
-        /// </summary>
-        [HelpProperty("pointlist")]
-        public List<Point3D> PointList { get; set; } = new List<Point3D>();
-
         public override XElement GetProperties(string PropertyName = "")
         {
             XElement bound = new XElement("boundary", new XAttribute("prop", PropertyName));
@@ -43,7 +37,7 @@ namespace ShapeTemplateLib
         /// <summary>
         /// This load routine is called by boundary root, the boundary element has already been processed
         /// </summary>
-        /// <param name="ele"></param>
+        /// <param name="line"></param>
         /// <param name="message"></param>
         /// <returns></returns>
         public override bool LoadProperties(XElement line, out string message)
@@ -58,15 +52,17 @@ namespace ShapeTemplateLib
                 message = "Missing points in line";
                 return false;
             }
-  
+
             /*
              * Load the listof points
              */
+            this.PointList = new Point3D[xList.Count];
+            int index = 0;
             foreach (XElement xp in xList)
             {
                 Point3D p = new Point3D();
                 if (!p.LoadProperties(xp, out message)) return false;
-                this.PointList.Add(p);
+                this.PointList[index++] = p;
             }
             return true;
         }

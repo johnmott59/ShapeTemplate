@@ -74,9 +74,9 @@ namespace ShapeTemplateLib.BasicShapes
                     LongDescription = "A star shape with three holes in it. A list of points is used to define the outline ",
                     Sample = new FlatMesh()
                     {
-                        Boundary = new BoundaryLineSegment()
+                        Boundary = new BoundaryPolygon()
                         {
-                             PointList=new List<Point3D>()
+                             PointList=new Point3D[]
                              {
                                 new Point3D(30,0,0),
                                 new Point3D(48.54F,35.26f,0),

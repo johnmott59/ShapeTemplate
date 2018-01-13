@@ -13,46 +13,14 @@ namespace ShapeTemplateLib
     /// boundaries are defined in an XY plane that the viewer is facing, with X to the right, Y up and Z coming out. 
     /// </summary>
     [HelpItem(eItemFlavor.Data, "rectangle")]
-    public class BoundaryRectangle : BoundaryRoot
+    public partial class BoundaryRectangle : BoundaryRoot
     {
-        /// <summary>
-        /// Width of rectangle
-        /// </summary>
-        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public float Width { get; set; } = 20;
 
-        /// <summary>
-        /// Height of rectangle
-        /// </summary>
-        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public float Height { get; set; } = 20;
-
-        /// <summary>
-        /// ZDepth of Rectangle when placing this shape, either as a boundary or as a hole. Using ZDepth as part of the 
-        /// a boundary for a panel mesh lets you displace the mesh and create separation. Varying the Z Depth for a hole can produce
-        /// interesting effects and variations on shapes but should be done with caution as it can easily cause a shape to 'break'
-        /// or otherwise render as something unrecognizable.
-        /// </summary>
-        [HelpProperty(SampleValue = "0", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public float ZDepth { get; set; } = 0;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public BoundaryRectangle() {
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="Width"></param>
-        /// <param name="Height"></param>
-        /// <param name="ZDepth"></param>
-        public BoundaryRectangle(int Width, int Height, int ZDepth = 0)
+        public BoundaryRectangle(float Width, float Height, float zDepth = 0)
         {
             this.Width = Width;
             this.Height = Height;
-            this.ZDepth = ZDepth;
+            this.ZDepth = zDepth;
         }
 
         public override XElement GetProperties(string PropertyName = "")

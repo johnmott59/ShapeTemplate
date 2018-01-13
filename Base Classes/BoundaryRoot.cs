@@ -59,7 +59,7 @@ namespace ShapeTemplateLib
                     bound = new BoundaryEllipse();
                     return bound.LoadProperties(child, out message);
                 case "linesegment":
-                    bound = new BoundaryLineSegment();
+                    bound = new BoundaryPolygon();
                     return bound.LoadProperties(child, out message);
                 default:
                     message = $"Expected boundary value rectangle, ellipse or line, got {child.Name.LocalName}";

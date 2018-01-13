@@ -32,11 +32,14 @@ namespace ShapeTemplateLib
         public bool TypeIsExposed { get; set; }              // Is this an exposed type, a basic shape, template or data class?
         public bool IsList { get; set; }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="PropertyType">Type of this property</param>
-        /// <param name="ele">Optional XML documentation document</param>
+
+/// <summary>
+/// Constructor
+/// </summary>
+/// <param name="PropertyName"></param>
+/// <param name="PropertyType"></param>
+/// <param name="ContainingType"></param>
+/// <param name="ele"></param>
     
         public PropertyDoc(string PropertyName, Type PropertyType,Type ContainingType,XElement ele)
         {

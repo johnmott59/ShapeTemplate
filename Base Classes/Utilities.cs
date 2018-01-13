@@ -38,6 +38,12 @@ namespace ShapeTemplateLib
                 .FirstOrDefault(el => el.Attribute("prop") != null && el.Attribute("prop").Value == PropValue);
         }
 
+        public static XElement GetListElement(XElement ele, string ListName)
+        {
+            return ele.Elements("list")
+                .FirstOrDefault(el => el.Attribute("name") != null && el.Attribute("name").Value == ListName);
+        }
+
         public static bool GetChildElement(XElement parent,string childname,out XElement ele,out string message)
         {
             message = "OK";
@@ -126,6 +132,28 @@ namespace ShapeTemplateLib
             if (!int.TryParse(s, out value))
             {
                 message = $"Invalid int value for attribute {attributeName}";
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool GetFloatFromAttribute(XAttribute oAtt, out float value, out string message)
+        {
+            message = "OK";
+            value = 0;
+
+            string s = oAtt.Value;
+
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                message = $"Expected float, found empty attribute {oAtt.Name}";
+                return false;
+            }
+
+            if (!float.TryParse(s, out value))
+            {
+                message = $"Invalid float value for attribute {oAtt.Name}";
                 return false;
             }
 
