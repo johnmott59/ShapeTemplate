@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShapeTemplateLib
 {
-   public class Utilities
+    public class Utilities
     {
         /// <summary>
         /// Return the named attribute of the property child. This is used to retrieve properties for templates
@@ -27,10 +27,29 @@ namespace ShapeTemplateLib
             return p.FirstAttribute;
 
         }
+
         public static XElement GetNamedElementWithPropAttribute(XElement ele, string ElementName)
         {
             return GetNamedElementWithPropAttribute(ele, ElementName, ElementName);
         }
+
+        public static XElement GetNamedElementWithPropAttribute(XElement xContainer, string ElementName, string PropValue, out string message)
+        {
+            message = "OK";
+
+            XElement xEle = xContainer.Elements(ElementName)
+                .FirstOrDefault(el => el.Attribute("prop") != null && el.Attribute("prop").Value == PropValue);
+
+            if (xEle == null)
+            {
+                message = $"Missing {ElementName} node with property {PropValue}";
+                return null;
+            }
+
+            return xEle;
+        }
+
+     
 
         public static XElement GetNamedElementWithPropAttribute(XElement ele, string ElementName,string PropValue)
         {

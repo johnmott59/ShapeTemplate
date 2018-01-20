@@ -8,15 +8,37 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-
+    /// <summary>
+    /// The Hole class is used to hold a single hole for a wall or floor panel in a layout. A Hole can be BoundaryRectangle,
+    /// BoundraryEllipse or BoundaryPolygon. A hole has an offset and the description of the shape.
+    /// For purposes of definition a hole has an offset and values that are X/Y as if you were looking at a 2D cartesion coordinate system.
+    /// The X,Y is mapped to the panel where 0,0 is the lower left of the panel. 
+    /// </summary>
+    [HelpItem(eItemFlavor.TemplateSupport, "Hole")]
     public partial class Hole
     {
-        // The starting offset of the hole
+        /// <summary>
+        /// X Offset of this hole. 
+        /// </summary>
+        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
         public float OffsetX { get; set; }
+        /// <summary>
+        /// Y Offset of this hole. 
+        /// </summary>
+        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
         public float OffsetY { get; set; }
 
-        // outline of the hole
+        /// <summary>
+        /// The type of the hole indicates whether its a rectangle, ellipse or polygon
+        /// </summary>
+        [HelpProperty(SampleValue = "rect", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
         public string HoleType { get; set; }
+
+        /// <summary>
+        /// Within a layout the outlines for the rectangle, ellipse and polygon are stored in separate arrays. This index value
+        /// is the index value of the specific outline within its array
+        /// </summary>
+        [HelpProperty(SampleValue = "4", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
         public int HoleTypeIndex { get; set; }
 
         public Hole()

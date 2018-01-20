@@ -57,9 +57,12 @@ namespace ShapeTemplateLib
             {
                 this.PropertyType = PropertyType;
             }
+            // If the property is an array, remove the []
+            string pname = this.PropertyType.Name;
+            if (this.PropertyType.IsArray) pname = pname.Replace("[]", "");
 
             // Remember whether this property is an exposed type, a basic shape, template or data class
-            this.TypeIsExposed = ItemDoc.ExposedItemList.Where(m => m ==this.PropertyType.Name).Count() > 0 ? true : false;
+            this.TypeIsExposed = ItemDoc.ExposedItemList.Where(m => m == pname).Count() > 0 ? true : false;
             /*
              * See if this type is in the list
              */

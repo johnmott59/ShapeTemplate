@@ -27,7 +27,11 @@ namespace ShapeTemplateLib
         /// <summary>
         /// An enumeration type has a list of values
         /// </summary>
-        Enumeration
+        Enumeration,
+        /// <summary>
+        /// The support class type is for classes that are support classes for a template to hold components for the template
+        /// </summary>
+        TemplateSupport
     }
 
     /// <summary>

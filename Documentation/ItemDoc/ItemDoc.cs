@@ -75,6 +75,8 @@ namespace ShapeTemplateLib
                 /*
                  * Get the properties for this class that have help property attributes
                  */
+                PropertyInfo[] pilist = ItemType.GetProperties();
+
                 foreach (PropertyInfo pi in ItemType.GetProperties().Where(m => m.GetCustomAttribute<HelpPropertyAttribute>() != null))
                 {
                     HelpPropertyAttribute hpa = pi.GetCustomAttribute<HelpPropertyAttribute>();
