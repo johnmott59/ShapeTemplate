@@ -1,0 +1,325 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #> 
+<#@ output extension=".txt" #> 
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="EF.Utility.CS.ttinclude"#> 
+ 
+<#
+	var fileManager = EntityFrameworkTemplateFileManager.Create(this); 
+
+	string Classname = "GearBaseTemplate";
+
+	List<TemplateProperty> list = new List<TemplateProperty>() {
+		new TemplateProperty () { PropertyName = "HorizontalScale"	
+			, PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "VerticalScale"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "Width"			
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "Length"			
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "Height"			
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "Thickness"		
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+		
+		new TemplateProperty () { PropertyName = "RoofOffset"		
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+	
+		new TemplateProperty () { PropertyName = "Door"				
+			,PropertyType="SRBRectHole"
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+	
+		new TemplateProperty () { PropertyName = "FrontWindow"		
+			,PropertyType="SRBRectHole"
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+	
+		new TemplateProperty () { PropertyName = "LeftWindow"		
+			,PropertyType="SRBRectHole"
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+	
+		new TemplateProperty () { PropertyName = "RearWindow"		
+			,PropertyType="SRBRectHole"
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+	
+		new TemplateProperty () { PropertyName = "RightWindow"		
+			,PropertyType="SRBRectHole"
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+	};
+
+	fileManager.StartHeader(); 
+
+	fileManager.StartNewFile("ClassProperties.cs"); 
+	ClassProperties(Classname,list);
+
+	fileManager.StartNewFile("GetProperties.cs"); 
+	GetProperties(Classname,list);
+
+	fileManager.StartNewFile("LoadProperties.cs"); 
+	LoadProperties(Classname,list);
+
+	fileManager.StartNewFile("GetJSON.cs"); 
+	GetJSON(Classname,list);
+
+	fileManager.StartNewFile("LoadJSON.cs"); 
+	LoadJSON(Classname,list);
+	
+	fileManager.Process(); 
+
+#>
+<#+
+
+public class TemplateProperty {
+	public string PropertyName	{get;set;}
+	public string PropertyType	{get;set;}
+	public string XMLPosition	{get;set;}
+	public bool PropertyNode	{get;set;}
+}
+//==========================================================================
+void ClassProperties(string Classname,List<TemplateProperty> TemplatePropertyList) {
+
+GenerateHeader(Classname,true);
+
+foreach(TemplateProperty o in TemplatePropertyList) {
+	#>
+
+        /// <summary>
+        ///  <#=o.PropertyName#>  
+        /// </summary>
+	    [HelpProperty(SampleValue = "", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.<#=o.XMLPosition#>)]
+		public <#=o.PropertyType#> <#=o.PropertyName#> { get; set; } 
+
+	<#+
+}
+
+GenerateFooter();
+
+}
+//==========================================================================
+void GetProperties(string Classname,List<TemplateProperty> TemplatePropertyList) {
+
+GenerateHeader(Classname);
+
+#>
+	public override XElement GetProperties(string PropertyName = "")
+    {
+          XElement root = new XElement("template",
+                new XAttribute("prop", PropertyName),
+                new XAttribute("user", "User0"),
+                new XAttribute("name", "<#=Classname#>".ToLower()));
+
+<#+
+foreach(TemplateProperty o in TemplatePropertyList) {
+	if (o.PropertyNode) {
+	#> 
+			root.Add(new XElement("property", new XAttribute(nameof(<#=o.PropertyName#>).ToLower(), <#=o.PropertyName#>)));
+	<#+
+	} else {
+	#>
+
+			root.Add(<#=o.PropertyName#>.GetProperties("<#=o.PropertyName.ToLower()#>"));
+	<#+
+	}
+}
+#>
+                
+            return root;
+	}
+<#+
+
+GenerateFooter();
+
+}
+//==========================================================================
+void LoadProperties(string Classname,List<TemplateProperty> TemplatePropertyList) {
+
+GenerateHeader(Classname);
+#>
+       public override bool LoadProperties(XElement xTemplateNode, out string message)
+       {
+			float fTmp;
+			int iTmp;
+
+			message = "OK";
+			XElement xNode;
+       <#+
+
+	   foreach(TemplateProperty o in TemplatePropertyList) {
+		if (o.PropertyNode) {
+			switch (o.PropertyType) {
+			case "float":
+			#>
+
+				if (!GetPropertyFloat(xTemplateNode, nameof(<#=o.PropertyName#>), out fTmp, out message)) return false;
+				<#=o.PropertyName#> = fTmp;
+			<#+
+				break;
+			case "int":
+			#>
+
+				if (!GetPropertyInt(xTemplateNode, nameof(<#=o.PropertyName#>), out iTmp, out message)) return false;
+				<#=o.PropertyName#> = iTmp;
+			<#+
+				break;
+			
+			}
+
+			} else {
+			#>
+
+				xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "<#=o.PropertyType.ToLower()#>", "<#=o.PropertyName.ToLower()#>",out message);
+				if (xNode == null) return false;
+				if (!<#=o.PropertyName#>.LoadProperties(xNode, out message)) return false;
+			<#+
+			}
+		}
+	   #>
+	   }
+
+
+<#+
+
+
+GenerateFooter();
+
+}
+//==========================================================================
+void GetJSON(string Classname,List<TemplateProperty> TemplatePropertyList) {
+
+GenerateHeader(Classname);
+#>
+        public override JSONDataTrain GetJSONDataTrain()
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+
+            List<JSONDataCarriage> list = new List<JSONDataCarriage>()
+            {
+
+<#+
+foreach(TemplateProperty o in TemplatePropertyList) {
+	#> 
+			new JSONDataCarriage() {
+				fieldname = "<#=o.PropertyName#>",
+                fieldvalue = ser.Serialize(<#=o.PropertyName#> )
+			},
+	<#+
+}
+#>
+
+			};
+		}
+
+<#+
+GenerateFooter();
+
+}
+
+//==========================================================================
+void LoadJSON(string Classname,List<TemplateProperty> TemplatePropertyList) {
+
+GenerateHeader(Classname);
+
+#>
+
+     public override void LoadJSONDataTrain(string sDataTrain)
+     {
+		JavaScriptSerializer ser = new JavaScriptSerializer();
+        /*
+         * Decode this data train
+         */
+        JSONDataTrain oDataTrain = ser.Deserialize<JSONDataTrain>(sDataTrain);
+        /*
+         * Load each of the values from their carriage
+         */
+        JSONDataCarriage oCarriage;
+
+<#+
+foreach(TemplateProperty o in TemplatePropertyList) {
+	#> 
+	        oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(<#=o.PropertyName#>)).FirstOrDefault();
+            if (oCarriage != null)
+            {
+                <#=o.PropertyName#> = ser.Deserialize<<#=o.PropertyType#>>(oCarriage.fieldvalue);
+            }
+	<#+
+}
+#>
+
+	}
+<#+
+GenerateFooter();
+
+}
+
+//==========================================================================
+void GenerateHeader(string Classname, bool Subclass = false) {
+
+string sc = Subclass ? ": TemplateRoot" : "";
+#>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using ShapeTemplateLib.BasicShapes;
+using System.Web.Script.Serialization;
+
+namespace ShapeTemplateLib.Templates.User0 
+{
+    public partial class <#=Classname#> <#=sc#>
+    {
+
+<#+
+}
+//==========================================================================
+void GenerateFooter() {
+#>
+
+	}
+}
+<#+
+
+}
+
+#>
