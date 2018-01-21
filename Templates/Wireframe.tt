@@ -10,11 +10,17 @@
 <#
 	var fileManager = EntityFrameworkTemplateFileManager.Create(this); 
 
-	string Classname = "xxGearBase";
+	string Classname = "GearBase";
 
 	List<TemplateProperty> list = new List<TemplateProperty>() {
 
 		new TemplateProperty () { PropertyName = "Scale"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			},
+
+		new TemplateProperty () { PropertyName = "Width"	
 			,PropertyType="float"		
 			,XMLPosition="TemplateProperty"
 			,PropertyNode=true
@@ -38,7 +44,7 @@
 	fileManager.StartNewFile("Compile.cs");
 	Compile(Classname);
 
-	fileManager.StartNewFile("ClassProperties.cs"); 
+	fileManager.StartNewFile(Classname + ".cs"); 
 	ClassProperties(Classname,list);
 
 	fileManager.StartNewFile("GetProperties.cs"); 

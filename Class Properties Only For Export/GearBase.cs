@@ -27,6 +27,13 @@ namespace ShapeTemplateLib.Templates.User0
 
 	
         /// <summary>
+        ///  Width  
+        /// </summary>
+	    [HelpProperty(SampleValue = "", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
+		public float Width { get; set; } 
+
+	
+        /// <summary>
         ///  ToothCount  
         /// </summary>
 	    [HelpProperty(SampleValue = "", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.TemplateProperty)]
