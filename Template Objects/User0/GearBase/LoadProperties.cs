@@ -24,6 +24,9 @@ namespace ShapeTemplateLib.Templates.User0
 				if (!GetPropertyFloat(xTemplateNode, nameof(Scale), out fTmp, out message)) return false;
 				Scale = fTmp;
 			
+				if (!GetPropertyFloat(xTemplateNode, nameof(Width), out fTmp, out message)) return false;
+				Width = fTmp;
+			
 				if (!GetPropertyInt(xTemplateNode, nameof(ToothCount), out iTmp, out message)) return false;
 				ToothCount = iTmp;
 			

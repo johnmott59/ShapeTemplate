@@ -27,6 +27,11 @@ namespace ShapeTemplateLib.Templates.User0
 			},
 	 
 			new JSONDataCarriage() {
+				fieldname = "Width",
+                fieldvalue = ser.Serialize(Width )
+			},
+	 
+			new JSONDataCarriage() {
 				fieldname = "ToothCount",
                 fieldvalue = ser.Serialize(ToothCount )
 			},

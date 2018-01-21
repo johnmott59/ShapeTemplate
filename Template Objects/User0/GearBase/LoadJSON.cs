@@ -33,6 +33,12 @@ namespace ShapeTemplateLib.Templates.User0
                 Scale = ser.Deserialize<float>(oCarriage.fieldvalue);
             }
 	 
+	        oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(Width)).FirstOrDefault();
+            if (oCarriage != null)
+            {
+                Width = ser.Deserialize<float>(oCarriage.fieldvalue);
+            }
+	 
 	        oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(ToothCount)).FirstOrDefault();
             if (oCarriage != null)
             {

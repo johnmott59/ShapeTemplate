@@ -23,6 +23,8 @@ namespace ShapeTemplateLib.Templates.User0
  
 			root.Add(new XElement("property", new XAttribute(nameof(Scale).ToLower(), Scale)));
 	 
+			root.Add(new XElement("property", new XAttribute(nameof(Width).ToLower(), Width)));
+	 
 			root.Add(new XElement("property", new XAttribute(nameof(ToothCount).ToLower(), ToothCount)));
 	
 			root.Add(ToothShape.GetProperties("toothshape"));
