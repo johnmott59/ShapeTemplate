@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace ShapeTemplateLib.Templates.User0 
 {
-    public partial class xxGearBase 
+    public partial class GearBase 
     {
 
 

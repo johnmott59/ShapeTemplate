@@ -10,10 +10,10 @@ using System.Web.Script.Serialization;
 
 namespace ShapeTemplateLib.Templates.User0 
 {
-    public partial class xxGearBase : TemplateRoot
+    public partial class GearBase : TemplateRoot
     {
 
-		public xxGearBase() {
+		public GearBase() {
 				ToothShape = new Point2DContainer();
 				
 	}

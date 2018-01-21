@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace ShapeTemplateLib.Templates.User0 
 {
-    public partial class xxGearBase 
+    public partial class GearBase 
     {
 
 	public override XElement GetProperties(string PropertyName = "")
@@ -18,7 +18,7 @@ namespace ShapeTemplateLib.Templates.User0
           XElement root = new XElement("template",
                 new XAttribute("prop", PropertyName),
                 new XAttribute("user", "User0"),
-                new XAttribute("name", "xxGearBase".ToLower()));
+                new XAttribute("name", "GearBase".ToLower()));
 
  
 			root.Add(new XElement("property", new XAttribute(nameof(Scale).ToLower(), Scale)));
