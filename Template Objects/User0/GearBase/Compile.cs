@@ -12,9 +12,9 @@ using System.Drawing.Drawing2D;
 
 namespace ShapeTemplateLib.Templates.User0 
 {
+
     public partial class GearBase 
     {
-
 		public override XElement Compile () {
             /*
              * Create a panel whose outline is a repetition of the tooth shape

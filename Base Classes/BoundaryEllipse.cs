@@ -8,12 +8,7 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib
 {
-    /// <summary>
-    /// The BoundaryEllipse class is used to define an ellipse with a width and a height. This width and height are X and Y values;
-    /// boundaries are defined in an XY plane that the viewer is facing, with X to the right, Y up and Z coming out. 
-    /// The XML name for this node will be the property name of the class that contains it
-    /// </summary>
-    [HelpItem(eItemFlavor.Data, "ellipse")]
+
     public partial class BoundaryEllipse : BoundaryRoot
     {
 

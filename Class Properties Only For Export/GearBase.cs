@@ -10,7 +10,11 @@ using System.Web.Script.Serialization;
 
 namespace ShapeTemplateLib.Templates.User0 
 {
-    public partial class GearBase : TemplateRoot
+    /// <summary>
+    /// The Gearbase is a gear shape
+    /// </summary>
+    [HelpItem(eItemFlavor.Template, "gearbase")]
+    public partial class GearBase 
     {
 
 		public GearBase() {

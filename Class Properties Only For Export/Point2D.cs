@@ -7,6 +7,11 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib
 {
+    /// <summary>
+    /// This class holds an X,Y  value representing a point in 2D. One use is to define edge positions in a simple layout
+    /// The name used for this element to the API is the field name for whatever contains it.
+    /// </summary>
+    [HelpItem(eItemFlavor.Data, "point2d")]
     public partial class Point2D 
     {
         [HelpProperty(XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent, SampleValue ="13.4")]

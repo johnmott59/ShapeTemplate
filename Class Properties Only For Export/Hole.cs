@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShapeTemplateLib
 {
+    /// <summary>
+    /// The hole in a flat mesh describes its placement and dimension. A hole is defined by a boundary and an offset from a
+    /// (0,0) position on the mesh in XY space. A mesh can have any orientation, of course, but for the purposes of placing
+    /// holes the mesh is positioned to an XY plane with +Z looking towards you, and the hole is defined as an offset and
+    /// boundary in that XY space
+    /// </summary>
+    [HelpItem(eItemFlavor.Data, "hole")]
     public partial class Hole
     {
         public Hole()

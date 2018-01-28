@@ -12,7 +12,6 @@ namespace ShapeTemplateLib
     /// The BoundaryRectangle class is used to define a rectangle with a width and a height. This width and height are X and Y values;
     /// boundaries are defined in an XY plane that the viewer is facing, with X to the right, Y up and Z coming out. 
     /// </summary>
-    [HelpItem(eItemFlavor.Data, "boundaryrectangle")]
     public partial class BoundaryRectangle : BoundaryRoot
     {
         /// <summary>

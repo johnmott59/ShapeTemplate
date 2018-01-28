@@ -7,11 +7,7 @@ using System.Xml.Linq;
 
 namespace ShapeTemplateLib
 {
-    /// <summary>
-    /// This class holds an X,Y and Z value representing a point in 3D space
-    /// The name used for this element to the API is the field name for whatever contains it.
-    /// </summary>
-    [HelpItem(eItemFlavor.Data,"point3d")]
+
     public partial class Point3D : ILoadAndSaveProperties
     {
         /// <summary>
