@@ -88,6 +88,7 @@ namespace ShapeTemplateLib.Templates.User0
                 p.FrontMesh.HoleList[i].ID = $"fm{i}";
 
                 p.BackMesh.HoleList[i] = Hole.CopyFrom(oHole);
+                p.BackMesh.HoleList[i].Offset = new Point3D(0, 0, Width);
                 p.BackMesh.HoleList[i].ID = $"bm{i}";
 
                 p.ConnectedHoleList.Add(new Panel.ConnectedHole()
