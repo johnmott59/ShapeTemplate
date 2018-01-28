@@ -35,6 +35,8 @@ namespace ShapeTemplateLib
         /// </summary>
         public BoundaryEllipse()
         {
+            // Set the type in the base class, the JSON serialization will use this
+            this.BoundaryType = "ellipse";
         }
 
         // The CopyFrom method is used in Javascript to convert a version of the object retrieved via JSON

@@ -10,7 +10,7 @@
 <#
 	var fileManager = EntityFrameworkTemplateFileManager.Create(this); 
 
-	string Classname = "GearBase";
+	string Classname = "xxGearBase";
 
 	List<TemplateProperty> list = new List<TemplateProperty>() {
 
@@ -34,6 +34,12 @@
 		
 		new TemplateProperty () { PropertyName = "ToothShape"	
 			,PropertyType="Point2DContainer"		
+			,XMLPosition="XElement"
+			,PropertyNode=false
+			},
+
+		new TemplateProperty () { PropertyName = "GearHoleGroup"	
+			,PropertyType="HoleContainer"		
 			,XMLPosition="XElement"
 			,PropertyNode=false
 			},

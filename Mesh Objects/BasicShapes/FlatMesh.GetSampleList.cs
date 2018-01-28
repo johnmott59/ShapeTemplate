@@ -57,7 +57,7 @@ namespace ShapeTemplateLib.BasicShapes
                             SidesToShow = MeshDisplayProperties.eMeshElementVisibility.ShowBoth,
                             MaterialColor = "#00FF00"
                         },
-                        HoleList=new List<Hole>()
+                        HoleList=new Hole[] 
                         {
                              new Hole()
                              {
@@ -96,7 +96,7 @@ namespace ShapeTemplateLib.BasicShapes
                             SidesToShow = MeshDisplayProperties.eMeshElementVisibility.ShowBoth,
                             MaterialColor = "#00FF00"
                         },
-                        HoleList=new List<Hole>()
+                        HoleList=new Hole[] 
                         {
                              new Hole()
                              {

@@ -3,60 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Xml.Linq;
 
-namespace ShapeTemplateLib.Templates.User0
+namespace ShapeTemplateLib
 {
-    /// <summary>
-    /// The Hole class is used to hold a single hole for a wall or floor panel in a layout. A Hole can be BoundaryRectangle,
-    /// BoundraryEllipse or BoundaryPolygon. A hole has an offset and the description of the shape.
-    /// For purposes of definition a hole has an offset and values that are X/Y as if you were looking at a 2D cartesion coordinate system.
-    /// The X,Y is mapped to the panel where 0,0 is the lower left of the panel. 
-    /// </summary>
-    [HelpItem(eItemFlavor.TemplateSupport, "Hole")]
     public partial class Hole
     {
-        /// <summary>
-        /// X Offset of this hole. 
-        /// </summary>
-        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public float OffsetX { get; set; }
-        /// <summary>
-        /// Y Offset of this hole. 
-        /// </summary>
-        [HelpProperty(SampleValue = "30", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public float OffsetY { get; set; }
-
-        /// <summary>
-        /// The type of the hole indicates whether its a rectangle, ellipse or polygon
-        /// </summary>
-        [HelpProperty(SampleValue = "rect", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public string HoleType { get; set; }
-
-        /// <summary>
-        /// Within a layout the outlines for the rectangle, ellipse and polygon are stored in separate arrays. This index value
-        /// is the index value of the specific outline within its array
-        /// </summary>
-        [HelpProperty(SampleValue = "4", XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent)]
-        public int HoleTypeIndex { get; set; }
-
         public Hole()
         {
-
+            Offset = new Point3D();
         }
+        /// <summary>
+        /// The ID value identifies this hole to other structures that may need it. It is not required
+        /// </summary>
+        [HelpProperty(XPropertyPosition = HelpPropertyAttribute.eXPropertyPosition.AttributeOfParent, SampleValue = "Window")]
+        public string ID { get; set; } = "";             // this is used to identify this hole structure with a larger shape
+
+        /// <summary>
+        /// The offset of a hole is where it is positioned
+        /// </summary>
+        [HelpProperty]
+        public Point3D Offset { get; set; } = new Point3D(0, 0, 0);
+
+        /// <summary>
+        /// The boundary for a hole can be a rectangle, ellipse or line segment
+        /// </summary>
+        [HelpProperty]
+        public BoundaryRoot Boundary { get; set; }
+
+        // The CopyFrom method is used in Javascript to convert a version of the object retrieved via JSON
+        // into a full object of this type. An object retrieved via JSON.parse() will have the correct property
+        // names but not be an object of this type, this will take that property-only version and create a full
+        // object
 
         public static Hole CopyFrom(Hole oFrom)
         {
             Hole oHole = new Hole();
-            oHole.OffsetX = oFrom.OffsetX;
-            oHole.OffsetY = oFrom.OffsetY;
 
-            oHole.HoleType = oFrom.HoleType;
-            oHole.HoleTypeIndex = oFrom.HoleTypeIndex;
+            oHole.ID = oFrom.ID;
+            oHole.Offset = Point3D.CopyFrom(oFrom.Offset);
+            oHole.Boundary = BoundaryRoot.CopyFrom(oFrom.Boundary);
 
             return oHole;
         }
     }
-
 }

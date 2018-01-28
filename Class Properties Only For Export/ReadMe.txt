@@ -1,7 +1,13 @@
 ﻿This directory contains class definitions for templates which will run in Javascript in edit handlers.
 
+All of this code goes into and Edit2D.ts file, which contains the base editor classes accessible by other .ts or .js routines.
+
 These class definitions will be swept into TypeScript files for export into Javascript, for use in edit handlers. 
 We do this so that the typescript handler has access to the raw types without having to port any support code for the classes.
+
+Since Javascript doesn't have clean namespaces these classes must have unique names for now. I know that there are techniques
+for accomodating namespaces in JS and when that has matured I can look at using them, but in the short to intermediate term
+the goal is JS simplicity, so unique names. Changing that in the future will not break anything.
 
 These are partial classes and contain only what is essential for a javascript version of this class, which includes
 

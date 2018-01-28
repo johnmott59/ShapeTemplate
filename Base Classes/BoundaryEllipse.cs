@@ -17,7 +17,7 @@ namespace ShapeTemplateLib
     public partial class BoundaryEllipse : BoundaryRoot
     {
 
-        public BoundaryEllipse(float Width, float Height,float ZDepth = 0)
+        public BoundaryEllipse(float Width, float Height,float ZDepth = 0) : this()
         {
             this.Width = Width;
             this.Height = Height;
@@ -26,12 +26,10 @@ namespace ShapeTemplateLib
 
         public override XElement GetProperties(string PropertyName = "")
         {
-            return new XElement("boundary",new XAttribute("prop",PropertyName), 
-                new XElement("ellipse", 
+            return new XElement("boundaryellipse", new XAttribute("prop",PropertyName), 
                     new XAttribute(nameof(Width).ToLower(), Width), 
                     new XAttribute(nameof(Height).ToLower(), Height),
                     new XAttribute(nameof(ZDepth).ToLower(), ZDepth)
-                    )
                 );
         }
         /// <summary>

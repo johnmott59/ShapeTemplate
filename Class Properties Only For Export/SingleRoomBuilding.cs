@@ -27,23 +27,24 @@ namespace ShapeTemplateLib.Templates.User0
 
             // Define a front door and window
 
-            Door = new SRBRectHole();
-            Door.Visible = true;
+            Door = new Hole();
             Door.Offset.X = 10;
             Door.Offset.Y = 0;
-            Door.Boundary.Width = 5;
-            Door.Boundary.Height = 10;
+            Door.Boundary = new BoundaryRectangle(5, 10);
 
-            FrontWindow = new SRBRectHole();
-            FrontWindow.Visible = true;
+            FrontWindow = new Hole();
             FrontWindow.Offset.X = 18;
             FrontWindow.Offset.Y = 5;
-            FrontWindow.Boundary.Width = 15;
-            FrontWindow.Boundary.Height = 5;
-                     
-            LeftWindow = new SRBRectHole();
-            RearWindow = new SRBRectHole();
-            RightWindow = new SRBRectHole();
+            FrontWindow.Boundary = new BoundaryRectangle(15, 5);
+
+            LeftWindow = new Hole();
+            LeftWindow.Boundary = new BoundaryRoot();
+
+            RearWindow = new Hole();
+            RearWindow.Boundary = new BoundaryRoot();
+
+            RightWindow = new Hole();
+            RightWindow.Boundary = new BoundaryRoot();
 
         }
         /// <summary>
@@ -97,27 +98,27 @@ namespace ShapeTemplateLib.Templates.User0
         /// <summary>
         /// Door properties
         /// </summary>
-        public SRBRectHole Door { get; set; }
+        public Hole Door { get; set; }
 
         /// <summary>
         /// Front window properties
         /// </summary>
-        public SRBRectHole FrontWindow { get; set; }
+        public Hole FrontWindow { get; set; }
 
         /// <summary>
         /// Left window properties
         /// </summary>
-        public SRBRectHole LeftWindow { get; set; }
+        public Hole LeftWindow { get; set; }
 
         /// <summary>
         /// Rear window properties
         /// </summary>
-        public SRBRectHole RearWindow { get; set; }
+        public Hole RearWindow { get; set; }
 
         /// <summary>
         /// Right window properties
         /// </summary>
-        public SRBRectHole RightWindow { get; set; }
+        public Hole RightWindow { get; set; }
 
     }
 }

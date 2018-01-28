@@ -28,7 +28,9 @@ namespace ShapeTemplateLib.Templates.User0
 			root.Add(new XElement("property", new XAttribute(nameof(ToothCount).ToLower(), ToothCount)));
 	
 			root.Add(ToothShape.GetProperties("toothshape"));
-	                
+
+            root.Add(GearHoles.GetProperties("gearholes"));
+
             return root;
 	}
 

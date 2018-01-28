@@ -12,7 +12,8 @@ namespace ShapeTemplateLib
     {
         public BoundaryRectangle()
         {
-
+            // Set the type in the base class, the JSON serialization will use this
+            this.BoundaryType = "rectangle";
         }
         /// <summary>
         /// Width of rectangle

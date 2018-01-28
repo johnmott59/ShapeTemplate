@@ -41,13 +41,13 @@ namespace ShapeTemplateLib.Templates.User0
             /*
              * Add each of the holes that are defined into the rectangle list, saving their indices
              */
-            if (Door.Visible || FrontWindow.Visible)
+            if (Door.Boundary.BoundaryType == "rectangle" || FrontWindow.Boundary.BoundaryType == "rectangle")
             {
-                List<Hole> FrontHoleList = new List<Hole>();
-                if (Door.Visible)
+                List<LayoutHole> FrontHoleList = new List<LayoutHole>();
+                if (Door.Boundary.BoundaryType == "rectangle")
                 {
-                    oSimpleLayout.BoundaryRectangleList.Add(Door.Boundary);
-                    FrontHoleList.Add(new Hole()
+                    oSimpleLayout.BoundaryRectangleList.Add((BoundaryRectangle) Door.Boundary);
+                    FrontHoleList.Add(new LayoutHole()
                     {
                         HoleType = "rect",
                         HoleTypeIndex = oSimpleLayout.BoundaryRectangleList.Count - 1,
@@ -56,10 +56,10 @@ namespace ShapeTemplateLib.Templates.User0
                     });
                 }
 
-                if (FrontWindow.Visible)
+                if (FrontWindow.Boundary.BoundaryType == "rectangle")
                 {
-                    oSimpleLayout.BoundaryRectangleList.Add(FrontWindow.Boundary);
-                    FrontHoleList.Add(new Hole()
+                    oSimpleLayout.BoundaryRectangleList.Add((BoundaryRectangle) FrontWindow.Boundary);
+                    FrontHoleList.Add(new LayoutHole()
                     {
                         HoleType = "rect",
                         HoleTypeIndex = oSimpleLayout.BoundaryRectangleList.Count - 1,
@@ -77,9 +77,9 @@ namespace ShapeTemplateLib.Templates.User0
 
             // Add the remainder of the holes
 
-            AddSRBHole(LeftWindow, "LeftID", oSimpleLayout);
-            AddSRBHole(RightWindow, "RightID", oSimpleLayout);
-            AddSRBHole(RearWindow, "RearID", oSimpleLayout);
+            AddHole(LeftWindow, "LeftID", oSimpleLayout);
+            AddHole(RightWindow, "RightID", oSimpleLayout);
+            AddHole(RearWindow, "RearID", oSimpleLayout);
 
             // Add a roof panel
 
@@ -99,32 +99,31 @@ namespace ShapeTemplateLib.Templates.User0
                 DescriptorList = DescriptorList,
             });
             
-
             return oSimpleLayout.Compile();
 
         }
 
-        protected void AddSRBHole(SRBRectHole oHole, string HoleGroupID, SimpleLayout oSimpleLayout)
+        protected void AddHole(Hole oHole, string HoleGroupID, SimpleLayout oSimpleLayout)
         {
-            if (oHole.Visible)
-            {
-                oSimpleLayout.BoundaryRectangleList.Add(oHole.Boundary);
+            if (oHole.Boundary.BoundaryType != "rectangle") return;
+            
+            oSimpleLayout.BoundaryRectangleList.Add((BoundaryRectangle) oHole.Boundary);
 
-                List<Hole> HoleList = new List<Hole>();
-                HoleList.Add(new Hole()
-                {
-                    HoleType = "rect",
-                    HoleTypeIndex = oSimpleLayout.BoundaryRectangleList.Count - 1,
-                    OffsetX = oHole.Offset.X,
-                    OffsetY = oHole.Offset.Y
-                });
+            List<LayoutHole> HoleList = new List<LayoutHole>();
+            HoleList.Add(new LayoutHole()
+            {
+                HoleType = "rect",
+                HoleTypeIndex = oSimpleLayout.BoundaryRectangleList.Count - 1,
+                OffsetX = oHole.Offset.X,
+                OffsetY = oHole.Offset.Y
+            });
                 
-                oSimpleLayout.HoleGroupList.Add(new HoleGroup()
-                {
-                    HoleGroupID = HoleGroupID,
-                    HoleList = HoleList.ToArray()
-                });
-            }
+            oSimpleLayout.HoleGroupList.Add(new HoleGroup()
+            {
+                HoleGroupID = HoleGroupID,
+                HoleList = HoleList.ToArray()
+            });
+            
         }
     }
 }

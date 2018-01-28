@@ -56,9 +56,9 @@ namespace ShapeTemplateLib.BasicShapes
                                   SidesToShow = MeshDisplayProperties.eMeshElementVisibility.ShowBoth,
                                   MaterialColor = "#0000FF"
                               },
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(10,10,0),
@@ -75,9 +75,9 @@ namespace ShapeTemplateLib.BasicShapes
                                   MaterialColor = "#0000FF"
                               },
                               Offset =new Point3D(0,0,-30),
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(10,10,0),
@@ -114,15 +114,15 @@ namespace ShapeTemplateLib.BasicShapes
                                   SidesToShow = MeshDisplayProperties.eMeshElementVisibility.ShowBoth,
                                   MaterialColor = "#0000FF"
                               },
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(8,10,0),
                                         ID="front"
                                    },
-                                    new FlatMesh.Hole()
+                                    new Hole()
                                    {
                                         Boundary=new BoundaryEllipse(5,10),
                                         Offset=new Point3D(30,20,0),
@@ -138,15 +138,15 @@ namespace ShapeTemplateLib.BasicShapes
                                   MaterialColor = "#0000FF"
                               },
                               Offset =new Point3D(0,0,-30),
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(10,10,0),
                                         ID="back"
                                    },
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryEllipse(10,5),
                                         Offset=new Point3D(10,40,0),
@@ -217,9 +217,9 @@ namespace ShapeTemplateLib.BasicShapes
                                   SidesToShow = MeshDisplayProperties.eMeshElementVisibility.ShowBoth,
                                   MaterialColor = "#0000FF"
                               },
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(10,10,0),
@@ -236,9 +236,9 @@ namespace ShapeTemplateLib.BasicShapes
                                   MaterialColor = "#0000FF"
                               },
                               Offset =new Point3D(0,0,-30),
-                              HoleList=new List<FlatMesh.Hole>()
+                              HoleList=new Hole[]
                               {
-                                   new FlatMesh.Hole()
+                                   new Hole()
                                    {
                                         Boundary=new BoundaryRectangle(15,15),
                                         Offset=new Point3D(10,10,0),

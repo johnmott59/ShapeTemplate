@@ -50,9 +50,15 @@ namespace ShapeTemplateLib.Templates.User0
             {
                 ToothShape = ser.Deserialize<Point2DContainer>(oCarriage.fieldvalue);
             }
-	
-		
-	}
+            
+            oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(GearHoles)).FirstOrDefault();
+            if (oCarriage != null)
+            {
+                GearHoles = ser.Deserialize<HoleContainer>(oCarriage.fieldvalue);
+            }
+
+
+        }
 
 	}
 }

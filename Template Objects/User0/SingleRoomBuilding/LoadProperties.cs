@@ -40,23 +40,23 @@ namespace ShapeTemplateLib.Templates.User0
 
             XElement xNode;
 
-            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "srbhole", "door",out message);
+            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "hole", "door",out message);
             if (xNode == null) return false;
             if (!Door.LoadProperties(xNode, out message)) return false;
 
-            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "srbhole", "frontwindow", out message);
+            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "hole", "frontwindow", out message);
             if (xNode == null) return false;
             if (!FrontWindow.LoadProperties(xNode, out message)) return false;
 
-            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "srbhole", "leftwindow", out message);
+            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "hole", "leftwindow", out message);
             if (xNode == null) return false;
             if (!LeftWindow.LoadProperties(xNode, out message)) return false;
 
-            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "srbhole", "rearwindow", out message);
+            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "hole", "rearwindow", out message);
             if (xNode == null) return false;
             if (!RearWindow.LoadProperties(xNode, out message)) return false;
 
-            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "srbhole", "rightwindow", out message);
+            xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "hole", "rightwindow", out message);
             if (xNode == null) return false;
             if (!RightWindow.LoadProperties(xNode, out message)) return false;
 

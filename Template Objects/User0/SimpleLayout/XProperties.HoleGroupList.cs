@@ -20,7 +20,7 @@ namespace ShapeTemplateLib.Templates.User0
                 XElement XHoleGroup = new XElement("holegroup",
                     new XAttribute("holegroupid", hg.HoleGroupID));
                 XHoleGroupList.Add(XHoleGroup);
-                foreach (Hole h in hg.HoleList)
+                foreach (LayoutHole h in hg.HoleList)
                 {
                     XElement boundary = new XElement("boundary");
 
@@ -69,14 +69,14 @@ namespace ShapeTemplateLib.Templates.User0
                     if (!Utilities.GetStringAttribute(XBoundary, "holetype", out holetype, out message)) return false;
 
                     // Add this hole to this holegroup
-                    Hole h = new Hole();
+                    LayoutHole h = new LayoutHole();
                     h.OffsetX = offsetx;
                     h.OffsetY = offsety;
                     h.HoleType = holetype;
                     h.HoleTypeIndex = holetypeindex;
 #if DOTNET
                     // convert to list, add, then reconvert to array
-                    List<Hole> tmp = new List<Hole>(hg.HoleList);
+                    List<LayoutHole> tmp = new List<LayoutHole>(hg.HoleList);
                     tmp.Add(h);
                     hg.HoleList = tmp.ToArray();
 #else

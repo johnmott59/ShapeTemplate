@@ -34,6 +34,7 @@ namespace ShapeTemplateLib.Templates.User0
             );
 
 
+            
             root.Add(Door.GetProperties("door"));
             root.Add(FrontWindow.GetProperties("frontwindow"));
             root.Add(LeftWindow.GetProperties("leftwindow"));

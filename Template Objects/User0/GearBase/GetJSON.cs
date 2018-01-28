@@ -40,8 +40,13 @@ namespace ShapeTemplateLib.Templates.User0
 				fieldname = "ToothShape",
                 fieldvalue = ser.Serialize(ToothShape )
 			},
-	
-			};
+
+            new JSONDataCarriage() {
+                fieldname = "GearHoleGroup",
+                fieldvalue = ser.Serialize(GearHoles )
+            },
+
+            };
 
 			return new JSONDataTrain() { JSONDataCarriageArray = list.ToArray() };
 		}

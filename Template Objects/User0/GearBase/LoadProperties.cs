@@ -33,8 +33,12 @@ namespace ShapeTemplateLib.Templates.User0
 				xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "point2dcontainer", "toothshape",out message);
 				if (xNode == null) return false;
 				if (!ToothShape.LoadProperties(xNode, out message)) return false;
-			
-	   return true;
+
+                xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "holegroup", "gearholegroup", out message);
+                if (xNode == null) return false;
+                if (!GearHoles.LoadProperties(xNode, out message)) return false;
+
+            return true;
 	   }
 
 	}

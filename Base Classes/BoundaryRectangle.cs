@@ -12,11 +12,17 @@ namespace ShapeTemplateLib
     /// The BoundaryRectangle class is used to define a rectangle with a width and a height. This width and height are X and Y values;
     /// boundaries are defined in an XY plane that the viewer is facing, with X to the right, Y up and Z coming out. 
     /// </summary>
-    [HelpItem(eItemFlavor.Data, "rectangle")]
+    [HelpItem(eItemFlavor.Data, "boundaryrectangle")]
     public partial class BoundaryRectangle : BoundaryRoot
     {
-
-        public BoundaryRectangle(float Width, float Height, float zDepth = 0)
+        /// <summary>
+        /// Additional constructors are defined outside of the code that's exported to typescript; the typescript
+        /// constructors are no parameters
+        /// </summary>
+        /// <param name="Width"></param>
+        /// <param name="Height"></param>
+        /// <param name="zDepth"></param>
+        public BoundaryRectangle(float Width, float Height, float zDepth = 0) : this()
         {
             this.Width = Width;
             this.Height = Height;
@@ -25,15 +31,16 @@ namespace ShapeTemplateLib
 
         public override XElement GetProperties(string PropertyName = "")
         {
-            return new XElement("boundary", new XAttribute("prop", PropertyName),
-                new XElement("rectangle", 
-                    new XAttribute(nameof(Width).ToLower(), Width), 
-                    new XAttribute(nameof(Height).ToLower(), Height),
-                    new XAttribute(nameof(ZDepth).ToLower(), ZDepth)
-                    ));
+            return new XElement("boundaryrectangle",
+               new XAttribute("prop",PropertyName),
+               new XAttribute(nameof(Width).ToLower(), Width),
+               new XAttribute(nameof(Height).ToLower(), Height),
+               new XAttribute(nameof(ZDepth).ToLower(), ZDepth)
+               );
+
         }
         /// <summary>
-        /// This load routine is called by boundary root, the boundary element has already been processed
+        /// This routine is called on the boundaryrectangle node
         /// </summary>
         /// <param name="ele"></param>
         /// <param name="message"></param>
