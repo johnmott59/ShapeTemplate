@@ -34,7 +34,7 @@ namespace ShapeTemplateLib.Templates.User0
 				if (xNode == null) return false;
 				if (!ToothShape.LoadProperties(xNode, out message)) return false;
 
-                xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "holegroup", "gearholegroup", out message);
+                xNode = Utilities.GetNamedElementWithPropAttribute(xTemplateNode, "holecontainer", "gearholes", out message);
                 if (xNode == null) return false;
                 if (!GearHoles.LoadProperties(xNode, out message)) return false;
 
