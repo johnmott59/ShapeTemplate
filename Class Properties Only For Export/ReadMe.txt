@@ -1,6 +1,11 @@
 ﻿This directory contains class definitions for templates which will run in Javascript in edit handlers.
 
-All of this code goes into and Edit2D.ts file, which contains the base editor classes accessible by other .ts or .js routines.
+The template classes themselves don't need to be in this directory unless they are referenced, and that would only happen
+if a template were to contain other templates as properties. The general flow of data is that the MVC controller will 
+construct a 'datatrain' consisting of each property of a template and its value, one property per 'datacarriage', and that's how 
+the data flows back and forth between the page and the MVC controllers.
+
+All of this code goes into the Edit2D.ts file, which contains the base editor classes accessible by other .ts or .js routines.
 
 These class definitions will be swept into TypeScript files for export into Javascript, for use in edit handlers. 
 We do this so that the typescript handler has access to the raw types without having to port any support code for the classes.
