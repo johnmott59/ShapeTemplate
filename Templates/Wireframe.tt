@@ -10,39 +10,60 @@
 <#
 	var fileManager = EntityFrameworkTemplateFileManager.Create(this); 
 
-	string Classname = "xxGearBase";
+	string Classname = "xxSingleRoomBuilding";
 
 	List<TemplateProperty> list = new List<TemplateProperty>() {
 
-		new TemplateProperty () { PropertyName = "Scale"	
+			new TemplateProperty () { PropertyName = "RoofOffset"	
 			,PropertyType="float"		
 			,XMLPosition="TemplateProperty"
 			,PropertyNode=true
+			,ControlName="TextBox"
+			},
+
+		new TemplateProperty () { PropertyName = "Height"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			,ControlName="TextBox"
+			},
+
+		new TemplateProperty () { PropertyName = "Length"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			,ControlName="TextBox"
+			},
+
+		new TemplateProperty () { PropertyName = "Thickness"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			,ControlName="TextBox"
+			},
+
+		new TemplateProperty () { PropertyName = "HorizontalScale"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			,ControlName="TextBox"
+			},
+
+		new TemplateProperty () { PropertyName = "VerticalScale"	
+			,PropertyType="float"		
+			,XMLPosition="TemplateProperty"
+			,PropertyNode=true
+			,ControlName="TextBox"
 			},
 
 		new TemplateProperty () { PropertyName = "Width"	
-			,PropertyType="float"		
-			,XMLPosition="TemplateProperty"
-			,PropertyNode=true
-			},
-
-		new TemplateProperty () { PropertyName = "ToothCount"	
 			,PropertyType="int"		
 			,XMLPosition="TemplateProperty"
 			,PropertyNode=true
-			},
-		
-		new TemplateProperty () { PropertyName = "ToothShape"	
-			,PropertyType="Point2DContainer"		
-			,XMLPosition="XElement"
-			,PropertyNode=false
+			,ControlName="TextBox"
 			},
 
-		new TemplateProperty () { PropertyName = "GearHoleGroup"	
-			,PropertyType="HoleContainer"		
-			,XMLPosition="XElement"
-			,PropertyNode=false
-			},
+	
 	};
 
 	fileManager.StartHeader(); 
@@ -52,6 +73,9 @@
 
 	fileManager.StartNewFile(Classname + ".cs"); 
 	ClassProperties(Classname,list);
+
+	fileManager.StartNewFile("EditorTabList.cs");
+	EditorTabList(Classname,list);
 
 	fileManager.StartNewFile("GetProperties.cs"); 
 	GetProperties(Classname,list);
@@ -78,6 +102,7 @@ public class TemplateProperty {
 	public string PropertyType	{get;set;}
 	public string XMLPosition	{get;set;}
 	public bool PropertyNode	{get;set;}
+	public string ControlName	{get;set;}
 }
 
 //==========================================================================
@@ -99,7 +124,6 @@ GenerateFooter();
 
 //==========================================================================
 void ClassProperties(string Classname,List<TemplateProperty> TemplatePropertyList) {
-
 GenerateHeader(Classname,true);
 
 #>
@@ -130,9 +154,59 @@ foreach(TemplateProperty o in TemplatePropertyList) {
 
 	<#+
 }
+GenerateFooter();
+}
+//==========================================================================
+void EditorTabList(string Classname,List<TemplateProperty> TemplatePropertyList) {
+GenerateHeader(Classname);
+#>
+        /// <summary>
+        /// This contains the editor definitions needed to modify this template in the browser. This property is 
+        /// only necessary if the template is to be edited in the browser, if its accessed from the API its not used.
+        /// </summary>
+        public override List<EditorTab> EditorTabList { get; set; } = new List<EditorTab>()
+        {
+                new EditorTab()
+                {
+                     EditorRowList=new List<EditorRow>()
+                     {
+
+<#+
+
+foreach(TemplateProperty o in TemplatePropertyList) {
+	#>
+
+                    new EditorRow() {
+                              EditorColumnList=new List<EditorColumn>()
+                              {
+                                   new EditorColumn()
+                                   {
+                                        ColumnType=EditorColumn.eColumnType.Label,
+                                        Label="<#=o.PropertyName#>",
+                                        Width=2
+
+                                   },
+                                   new EditorColumn()
+                                   {
+                                        ColumnType=EditorColumn.eColumnType.Control,
+                                        PropertyName="<#=o.PropertyName#>",
+                                        ControlName="TextBox",
+                                        Width=4
+                                   }
+
+                              }
+                         },
+	<#+
+}
+
+#>
+					}
+				}	
+		};
+<#+
+
 
 GenerateFooter();
-
 }
 //==========================================================================
 void GetProperties(string Classname,List<TemplateProperty> TemplatePropertyList) {
