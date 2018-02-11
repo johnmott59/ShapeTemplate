@@ -36,7 +36,8 @@ namespace ShapeTemplateLib
             {
                 if (pd.TypeIsExposed && !pd.IsList)
                 {
-                    node.Add(new XElement(pd.PropertyType.Name.ToLower(), new XAttribute("prop", ""))); 
+                    string name = pd.PropertyType.Name.Replace("[]", "").ToLower();
+                    node.Add(new XElement(name, new XAttribute("prop", ""))); 
                 }
                 else
                 {
