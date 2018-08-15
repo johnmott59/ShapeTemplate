@@ -16,10 +16,35 @@ namespace ShapeTemplateLib
     [HelpItem(eItemFlavor.Data, "vector3d")]
     public class Vector3D : Point3D
     {
+        public Vector3D()
+        {
+
+        }
+
         public Vector3D(float X, float Y, float Z) : base(X, Y, Z)
         {
 
         }
+
+        public double Magnitude
+        {
+            get { return Math.Sqrt(X * X + Y * Y + Z * Z); }
+        }
+
+        public static void Normalize(Vector3D v)
+        {
+            float m = (float) Math.Sqrt(v.X * v.X + v.Y * v.Y + v.Z * v.Z);
+            if (m > 0.001)
+            {
+                v.X /= m; v.Y /= m; v.Z /= m;
+            }
+        }
+
+        public static double Dot(Vector3D v1, Vector3D v2) // A . B = |A|*|B|*cos(angle)
+        {
+            return (v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z);
+        }
+
 
         public new  XElement GetProperties(string PropertyName="")
         {

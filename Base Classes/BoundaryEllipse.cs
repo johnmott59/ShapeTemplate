@@ -51,6 +51,45 @@ namespace ShapeTemplateLib
 
             return true;
         }
+
+        /// <summary>
+        /// If a boundaryroot object is a child of another class then loading from JSON requires an additional step
+        /// because Deserialize won't know how to extract the object. Instead we collect the properties that are
+        /// for the specific boundary type and extract them here.
+        /// </summary>
+        /// <param name="rectangleProperties"></param>
+        /// <returns></returns>
+        public static BoundaryEllipse LoadFromDictionary(Dictionary<string, object> rectangleProperties)
+        {
+            BoundaryEllipse br = new BoundaryEllipse();
+            br.Width = (float)Convert.ToDouble(rectangleProperties["Width"]);
+            br.Height = (float)Convert.ToDouble(rectangleProperties["Height"]);
+            br.ZDepth = (float)Convert.ToDouble(rectangleProperties["ZDepth"]);
+            return br;
+
+        }
+
+        // Get a list of 2D points for this rectangle. The class is defined in 3D but we use it in 2D situations
+        public override List<PointF> GetPoints2D(float OffsetX, float OffsetY)
+        {
+            List<PointF> PointList = new List<PointF>();
+
+            for (int i = 0; i <= 360; i += 9)
+            {
+                int angle = i >= 360 ? i - 360 : i;
+
+                float radians = (float)angle * .0174533f;
+
+                PointList.Add(new PointF()
+                {
+                    X = OffsetX + Width * (float)Math.Cos(radians),
+                    Y = OffsetY + Height * (float)Math.Sin(radians)
+                });
+            }
+
+            return PointList;
+
+        }
     }
 
 

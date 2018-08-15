@@ -87,11 +87,11 @@ namespace ShapeTemplateLib
     [HelpItem(eItemFlavor.Data,"boundary")]
     public partial class BoundaryRoot : ILoadAndSaveProperties
     {
-        // This value is set by the subclass
-        public string BoundaryType { get; set; } = "";
+
+
 
         /// <summary>
-      
+
         /// </summary>
         /// <param name="PropertyName"></param>
         /// <returns></returns>
@@ -148,41 +148,39 @@ namespace ShapeTemplateLib
             message = "OK";
             return true;
         }
-#if false
-        public static bool LoadXElement(XElement ele,out BoundaryRoot bound, out string message)
+
+        /// <summary>
+        /// If a boundaryroot is a property of another class then there we have to unpack that object a field at a time,
+        /// because deserialize won't pick up the properties correctly
+        /// </summary>
+        /// <param name="BoundaryType"></param>
+        /// <param name="dictBoundaryProperties"></param>
+        /// <returns></returns>
+
+        public static BoundaryRoot LoadFromDictionary(string BoundaryType, Dictionary<string, object> dictBoundaryProperties)
         {
-            if (ele == null)
-            {
-                message = $"Missing boundary element";
-                bound = null;
-                return false;
-            }
+            // Retrieve the boundary JSON. TBD push this processing into child classes
 
-            message = "OK";
-
-            // Based on the child, build and return an object
-            XElement child = (XElement) ele.FirstNode;
-
-            switch (child.Name.LocalName)
+            switch (BoundaryType)
             {
                 case "rectangle":
-                    bound = new BoundaryRectangle();
-                    return bound.LoadProperties(child, out message);
+                    return BoundaryRectangle.LoadFromDictionary(dictBoundaryProperties);
                 case "ellipse":
-                    bound = new BoundaryEllipse();
-                    return bound.LoadProperties(child, out message);
-                case "linesegment":
-                    bound = new BoundaryPolygon();
-                    return bound.LoadProperties(child, out message);
-                default:
-                    message = $"Expected boundary value rectangle, ellipse or line, got {child.Name.LocalName}";
-                    bound = null;
-                    return false;
+                    return BoundaryEllipse.LoadFromDictionary(dictBoundaryProperties);
+                case "polygon":
+                    // TBD
+                    break;
             }
-
+            return new BoundaryRoot();
         }
-#endif
 
+        // This routine will be overridden to return a list of 2D PointF points for the shape.
+        // The boundary shapes are actually 3D, but there are cases where we're working in 2D
+
+        public virtual List<PointF> GetPoints2D(float OffsetX,float OffsetY)
+        {
+            return new List<PointF>();
+        }
     }
 
 

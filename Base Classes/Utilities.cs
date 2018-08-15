@@ -28,6 +28,85 @@ namespace ShapeTemplateLib
 
         }
 
+        public static bool GetStringProperty(XElement ele, string PropertyName, out string sValue, out string message)
+        {
+            sValue = "";
+            message = "";
+
+            XAttribute oAtt = GetPropertyAttribute(ele, PropertyName);
+            if (oAtt == null)
+            {
+                message = PropertyName + " property not found";
+                return false;
+            }
+
+            sValue = oAtt.Value;
+
+            return true;
+
+        }
+
+        public static bool GetFloatProperty(XElement ele, string PropertyName, out float fValue, out string message)
+        {
+            fValue = 0;
+            message = "";
+
+            XAttribute oAtt = GetPropertyAttribute(ele, PropertyName);
+            if (oAtt == null)
+            {
+                message = PropertyName + " property not found";
+                return false;
+            }
+
+            string sValue = oAtt.Value;
+            if (sValue.Trim() == "")
+            {
+                message = PropertyName + " is empty, expecting an float value";
+                return false;
+            }
+
+            if (!float.TryParse(sValue, out fValue))
+            {
+                message = PropertyName + " is not an float";
+                return false;
+            }
+
+            return true;
+
+
+        }
+
+        public static bool GetIntProperty(XElement ele,string PropertyName,out int iValue, out string message)
+        {
+            iValue = 0;
+            message = "";
+
+            XAttribute oAtt = GetPropertyAttribute(ele, PropertyName);
+            if (oAtt == null)
+            {
+                message = PropertyName + " property not found";
+                return false;
+            }
+
+            string sValue = oAtt.Value;
+            if (sValue.Trim() == "")
+            {
+                message = PropertyName + " is empty, expecting an integer";
+                return false;
+            }
+
+            if (!Int32.TryParse(sValue,out iValue))
+            {
+                message = PropertyName + " is not an integer";
+                return false;
+            }
+
+            return true;
+
+
+        }
+
+
         public static XElement GetNamedElementWithPropAttribute(XElement ele, string ElementName)
         {
             return GetNamedElementWithPropAttribute(ele, ElementName, ElementName);
