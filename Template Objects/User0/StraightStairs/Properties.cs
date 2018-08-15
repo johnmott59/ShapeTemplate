@@ -8,7 +8,7 @@ using ShapeTemplateLib.BasicShapes;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public  partial class StraightStairs : TemplateRoot
+    public  partial class StraightStairs
     {
         /// <summary>
         /// The verticaldistance describes how they are placed vertically

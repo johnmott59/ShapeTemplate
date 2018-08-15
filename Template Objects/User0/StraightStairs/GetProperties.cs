@@ -8,7 +8,7 @@ using ShapeTemplateLib.BasicShapes;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public  partial class StraightStairs : TemplateRoot
+    public  partial class StraightStairs 
     {
      
         public override XElement GetProperties(string PropertyName="")
@@ -28,6 +28,17 @@ namespace ShapeTemplateLib.Templates.User0
             new XElement("property", new XAttribute(nameof(LeftSideTexture).ToLower(), LeftSideTexture)),
             new XElement("property", new XAttribute(nameof(RightSideTexture).ToLower(), RightSideTexture)),
             new XElement("property", new XAttribute(nameof(StairTexture).ToLower(), StairTexture)));
+
+
+            if (LocalTransform != null)
+            {
+                root.Add(LocalTransform.GetProperties("localtransform"));
+            }
+
+            if (oFrameOfReference != null)
+            {
+                root.Add(oFrameOfReference.GetProperties("frameofreference"));
+            }
 
             return root;
         }

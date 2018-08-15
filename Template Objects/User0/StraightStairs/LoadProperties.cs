@@ -9,7 +9,7 @@ using ShapeTemplateLib.BasicShapes;
 namespace ShapeTemplateLib.Templates.User0
 {
 
-    public  partial class StraightStairs : TemplateRoot
+    public  partial class StraightStairs 
     {
        
         public override bool LoadProperties(XElement ele, out string message)
@@ -23,6 +23,19 @@ namespace ShapeTemplateLib.Templates.User0
             {
                 if (!Utilities.GetIntFromAttribute(oAtt,  out iTmp, out message)) return false;
                 VerticalDistance = iTmp;
+            }
+
+            XElement xLocalTransform = Utilities.GetNamedElementWithPropAttribute(ele, "matrix4x4", "localtransform");
+            if (xLocalTransform != null)
+            {
+                if (!LocalTransform.LoadProperties(xLocalTransform, out message)) return false;
+            }
+
+            XElement xFrameOfReference = Utilities.GetNamedElementWithPropAttribute(ele, "frameofreference");
+            //ele.Element("frameofreference");
+            if (xFrameOfReference != null)
+            {
+                if (!oFrameOfReference.LoadProperties(xFrameOfReference, out message)) return false;
             }
 
             oAtt = Utilities.GetPropertyAttribute(ele, nameof(HorizontalDistance));
