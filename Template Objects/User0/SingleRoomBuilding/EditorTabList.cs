@@ -171,6 +171,26 @@ namespace ShapeTemplateLib.Templates.User0
 
                               }
                          },
+                    new EditorRow()
+                    {
+                         EditorColumnList=new List<EditorColumn>()
+                         {
+                             new EditorColumn()
+                             {
+                                  ColumnType=EditorColumn.eColumnType.Label,
+                                   Label="Front Door",
+                                   Width=2
+                             },
+                             new EditorColumn()
+                             {
+                                 ColumnType=EditorColumn.eColumnType.Control,
+                                  PropertyName="Door",
+                                  ControlName="RectangleWithOffset",
+                                  Width=8
+                             }
+                         }
+
+                    }
 						}
 				}	
 		};

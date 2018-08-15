@@ -9,7 +9,7 @@ using ShapeTemplateLib.BasicShapes;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public partial class SingleRoomBuilding : TemplateRoot
+    public partial class SingleRoomBuilding 
     {
 
         public override bool LoadProperties(XElement xTemplateNode, out string message)

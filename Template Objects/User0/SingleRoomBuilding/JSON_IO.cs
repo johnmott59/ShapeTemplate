@@ -128,35 +128,33 @@ namespace ShapeTemplateLib.Templates.User0
             oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(Door)).FirstOrDefault();
             if (oCarriage != null)
             {
-                /*
-                 * TBD We will need to deserialize the hole by finding its proper class 
-                 */
-                Door = ser.Deserialize<Hole>(oCarriage.fieldvalue);
+                 Door = Hole.LoadFromJSON(oCarriage.fieldvalue);
             }
 
             oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(FrontWindow)).FirstOrDefault();
             if (oCarriage != null)
             {
-                FrontWindow = ser.Deserialize<Hole>(oCarriage.fieldvalue);
+                FrontWindow = Hole.LoadFromJSON(oCarriage.fieldvalue);
             }
 
             oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(LeftWindow)).FirstOrDefault();
             if (oCarriage != null)
             {
-                LeftWindow = ser.Deserialize<Hole>(oCarriage.fieldvalue);
+                LeftWindow = Hole.LoadFromJSON(oCarriage.fieldvalue);
             }
 
             oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(RearWindow)).FirstOrDefault();
             if (oCarriage != null)
             {
-                RearWindow = ser.Deserialize<Hole>(oCarriage.fieldvalue);
+                RearWindow = Hole.LoadFromJSON(oCarriage.fieldvalue);
             }
 
             oCarriage = oDataTrain.JSONDataCarriageArray.Where(m => m.fieldname == nameof(RightWindow)).FirstOrDefault();
             if (oCarriage != null)
             {
-                RightWindow = ser.Deserialize<Hole>(oCarriage.fieldvalue);
+                RightWindow = Hole.LoadFromJSON(oCarriage.fieldvalue);
             }
         }
+
     }
 }

@@ -9,15 +9,15 @@ using ShapeTemplateLib;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public partial class SingleRoomBuilding : TemplateRoot
+    public partial class SingleRoomBuilding : TemplateBaseClass
     {
         /// <summary>
         /// Default constructor for the single room building, create a reasonably shaped
         /// </summary>
         public SingleRoomBuilding()
         {
-            HorizontalScale = 25;
-            VerticalScale = 25;
+            HorizontalScale = 1;
+            VerticalScale = 1;
 
             Width = 40;
             Height = 20;

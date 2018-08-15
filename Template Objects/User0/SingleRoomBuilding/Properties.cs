@@ -9,7 +9,7 @@ using ShapeTemplateLib;
 
 namespace ShapeTemplateLib.Templates.User0
 {
-    public partial class SingleRoomBuilding : TemplateRoot
+    public partial class SingleRoomBuilding 
     {
         /// <summary>
         /// The HorizontalScale describes how the layout is scaled in the plane of the layout objects; how much to stretch the 

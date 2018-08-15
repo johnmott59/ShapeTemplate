@@ -14,7 +14,7 @@ namespace ShapeTemplateLib.Templates.User0
     /// to 4 windows and a flat roof. This will use the simplelayout template as its basis, so it will compile to a simplelayout
     /// </summary>
     [HelpItem(eItemFlavor.Template, "singleroombuilding")]
-    public partial class SingleRoomBuilding : TemplateRoot
+    public partial class SingleRoomBuilding 
     {
 
         public override XElement GetProperties(string PropertyName = "")

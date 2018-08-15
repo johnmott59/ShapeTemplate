@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using ShapeTemplateLib.BasicShapes;
+using ShapeTemplateLib;
 
 namespace ShapeTemplateLib.Templates.User0
 {
@@ -22,6 +23,10 @@ namespace ShapeTemplateLib.Templates.User0
                 HorizontalScale = HorizontalScale,
                 VerticalScale = VerticalScale
             };
+
+            oSimpleLayout.LocalTransform = this.LocalTransform;
+            oSimpleLayout.oFrameOfReference = this.oFrameOfReference;
+
             // Create 4 vertices
             oSimpleLayout.VertexList = new List<Vertex>()
             {
