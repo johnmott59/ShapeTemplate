@@ -15,12 +15,14 @@ namespace ShapeTemplateLib.BasicShapes
     /// and there can be holes that connect the front and back, so its a very versatile shape.
     /// </summary>
     [HelpItem(eItemFlavor.BasicShape,"panel")]
-    public partial class Panel : ILoadAndSaveProperties, ICompile
+    public partial class Panel : TransformableRoot
     {
+
         [HelpProperty("frontmesh")]
         public FlatMesh FrontMesh { get; set; } = new FlatMesh();
         [HelpProperty("backmesh")]
         public FlatMesh BackMesh { get; set; } = new FlatMesh();
+
 
         /// <summary>
         /// The connector display properties has the display properties for the mesh that connectes the front and back
@@ -38,9 +40,22 @@ namespace ShapeTemplateLib.BasicShapes
         [HelpProperty("connectedholelist")]
         public List<Panel.ConnectedHole> ConnectedHoleList { get; set; } = new List<ConnectedHole>();
 
-        public bool LoadProperties(XElement ele, out string message)
+        public override bool LoadProperties(XElement ele, out string message)
         {
             message = "OK";
+
+            XElement xLocalTransform = Utilities.GetNamedElementWithPropAttribute(ele, "matrix4x4", "localtransform");
+            if (xLocalTransform != null)
+            {
+                if (!LocalTransform.LoadProperties(xLocalTransform, out message)) return false;
+            }
+
+            XElement xFrameOfReference = Utilities.GetNamedElementWithPropAttribute(ele, "frameofreference");
+            //ele.Element("frameofreference");
+            if (xFrameOfReference != null)
+            {
+                if (!oFrameOfReference.LoadProperties(xFrameOfReference, out message)) return false;
+            }
 
             XElement xFrontMesh = Utilities.GetNamedElementWithPropAttribute(ele, "flatmesh", "FrontMesh");          
             if (!FrontMesh.LoadProperties(xFrontMesh, out message)) return false;
@@ -116,9 +131,20 @@ namespace ShapeTemplateLib.BasicShapes
             return true;
         }
 
-        public XElement GetProperties(string PropertyName="")
+        public override XElement GetProperties(string PropertyName="")
         {
             XElement sp = new XElement("panel",new XAttribute("prop",PropertyName));
+
+            if (LocalTransform != null)
+            {
+                sp.Add(LocalTransform.GetProperties("localtransform"));
+            }
+
+            if (oFrameOfReference != null)
+            {
+                sp.Add(oFrameOfReference.GetProperties("frameofreference"));
+            }
+
 
             sp.Add(FrontMesh.GetProperties("FrontMesh"));
             sp.Add(BackMesh.GetProperties("BackMesh"));
@@ -151,7 +177,7 @@ namespace ShapeTemplateLib.BasicShapes
         /*
          * For a basic shape the compile step is the same as the set of properties
          */
-        public XElement Compile()
+        public override XElement Compile()
         {
             return GetProperties();
         }
