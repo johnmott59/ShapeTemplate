@@ -17,8 +17,8 @@ namespace ShapeTemplateLib.Templates.User0
             foreach (Edge s in EdgeList)
             {
                 XSegmentList.Add(new XElement("edge",
-                        new XAttribute("id", s.ID),
-                        new XAttribute("holegroupid", s.HoleGroupID),
+                        new XAttribute("id", s.ID == null ? "" : s.ID),
+                        new XAttribute("holegroupid", s.HoleGroupID == null ? "" : s.HoleGroupID),
                         new XAttribute("p1", s.p1),
                         new XAttribute("p2", s.p2),
                         new XAttribute("width", s.Width.ToString()),

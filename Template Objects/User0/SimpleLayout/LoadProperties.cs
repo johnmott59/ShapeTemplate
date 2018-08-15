@@ -15,6 +15,19 @@ namespace ShapeTemplateLib.Templates.User0
             float iTmp;
             message = "OK";
 
+            XElement xLocalTransform = Utilities.GetNamedElementWithPropAttribute(ele, "matrix4x4", "localtransform");
+            if (xLocalTransform != null)
+            {
+                if (!LocalTransform.LoadProperties(xLocalTransform, out message)) return false;
+            }
+
+            XElement xFrameOfReference = Utilities.GetNamedElementWithPropAttribute(ele, "frameofreference");
+            //ele.Element("frameofreference");
+            if (xFrameOfReference != null)
+            {
+                if (!oFrameOfReference.LoadProperties(xFrameOfReference, out message)) return false;
+            }
+
             // find each property
             XAttribute oAtt = Utilities.GetPropertyAttribute(ele, nameof(HorizontalScale));
             if (oAtt != null)

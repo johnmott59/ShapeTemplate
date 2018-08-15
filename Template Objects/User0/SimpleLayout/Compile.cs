@@ -17,7 +17,7 @@ namespace ShapeTemplateLib.Templates.User0
     /// VerticalScale properties so that the resulting mesh can be generated in a size appropriate for the platform using the mesh.
     /// </summary>
     [HelpItem(eItemFlavor.Template, "simplelayout")]
-    public partial class SimpleLayout : TemplateRoot
+    public partial class SimpleLayout : TemplateBaseClass
     {
 
         public override XElement Compile()

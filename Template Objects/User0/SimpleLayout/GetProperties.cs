@@ -20,6 +20,16 @@ namespace ShapeTemplateLib.Templates.User0
             new XElement("property", new XAttribute(nameof(HorizontalScale).ToLower(), HorizontalScale)),
             new XElement("property", new XAttribute(nameof(VerticalScale).ToLower(), VerticalScale)));
 
+            if (LocalTransform != null)
+            {
+                root.Add(LocalTransform.GetProperties("localtransform"));
+            }
+
+            if (oFrameOfReference != null)
+            {
+                root.Add(oFrameOfReference.GetProperties("frameofreference"));
+            }
+
             XElement XVertexList = new XElement("list", new XAttribute("name", nameof(VertexList).ToLower()));
             root.Add(XVertexList);
             XVertexList.Add(GetVertexList().Elements());
