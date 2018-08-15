@@ -19,7 +19,7 @@ namespace ShapeTemplateLib.Templates.User0
 
 		public GearBase() {
 
-            Scale = 10;
+            Scale = 20;
 
             ToothCount = 20;
 

@@ -70,8 +70,10 @@ namespace ShapeTemplateLib.Templates.User0
 
             Panel p = new Panel()
             {
-                FrontMesh = new FlatMesh() { Boundary = bpFront },
-                BackMesh = new FlatMesh() { Boundary = bpRear },
+                oFrameOfReference = this.oFrameOfReference,         // Pass down frame of reference
+                LocalTransform = this.LocalTransform,               // pass down local transform
+                FrontMesh = new FlatMesh() { Boundary = bpFront, oFrameOfReference=this.oFrameOfReference },
+                BackMesh = new FlatMesh() { Boundary = bpRear, oFrameOfReference=this.oFrameOfReference },
                 ConnectorSegmentVisible = ConnectorList,
             };
 
