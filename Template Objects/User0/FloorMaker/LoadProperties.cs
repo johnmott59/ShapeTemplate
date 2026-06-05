@@ -90,7 +90,7 @@ namespace ShapeTemplateLib.Templates.User0
             if (XList == null) return true;
 
             List<FMAssembledRoom> list = new List<FMAssembledRoom>();
-            foreach (XElement x in XList.Elements("flroom"))
+            foreach (XElement x in XList.Elements("fmassembledroom"))
             {
                 FMAssembledRoom o = new FMAssembledRoom() { oFloor = this };
                 if (!o.LoadProperties(x, out message)) return false;
