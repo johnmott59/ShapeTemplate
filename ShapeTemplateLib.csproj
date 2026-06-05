@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -70,6 +70,7 @@
     <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\LoadProperties.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\Properties.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\RandomlySelectDoors.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\RandomlySelectDoors.Overload.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.RemoveEdge.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.FindEdge.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\GetProperties.cs" />
