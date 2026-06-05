@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B5A4857-A7F5-4213-9A92-2058F768831B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ShapeTemplateLib</RootNamespace>
+    <AssemblyName>ShapeTemplateLib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ShapeTemplateLib.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\HelpItemAttribute.cs" />
+    <Compile Include="Attributes\HelpPropertyAttribute.cs" />
+    <Compile Include="Base Classes\Hole.cs" />
+    <Compile Include="Base Classes\HoleContainer.cs" />
+    <Compile Include="Base Classes\LineSegmentList.cs" />
+    <Compile Include="Base Classes\LineSegmentListList.cs" />
+    <Compile Include="Base Classes\Matrix4x4.cs" />
+    <Compile Include="Base Classes\Point2DContainer.cs" />
+    <Compile Include="Base Classes\FrameOfReference.cs" />
+    <Compile Include="Base Classes\Quaternion.cs" />
+    <Compile Include="Base Classes\RoomEdge.cs" />
+    <Compile Include="Base Classes\TemplateBaseClass.cs" />
+    <Compile Include="Class Properties Only For Export\BoundaryRoot.cs" />
+    <Compile Include="Class Properties Only For Export\FloorWithRooms.RoomEdge.cs" />
+    <Compile Include="Base Classes\RoomEdgeGroup.cs" />
+    <Compile Include="Class Properties Only For Export\LineSegment.cs" />
+    <Compile Include="Class Properties Only For Export\OffsetAndSize.cs" />
+    <Compile Include="PolygonEdge\IsParallel.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\GetEdgeList.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\Properties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\RandomlySelectDoors.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.RemoveEdge.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.FindEdge.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\Properties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMAssembledRoom\Properties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\GetCommonEdges.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\FindConnectedRooms.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SelectDoors\BuildPathwayToDestinationRoom.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\SetWallHeight.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\VertexList.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\GetSimpleLayoutRooms.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\Constructor.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\Intersects.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\IsEnclosedBy.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\Properties.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\ClipAgainst.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\Encloses.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\FindAndMerge.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\IsPointInside.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\IsPointOnEdgeList.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\ToRoomEdge.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\UnionOf.cs" />
+    <Compile Include="Editor\EditorColumn.cs" />
+    <Compile Include="Editor\EditorRow.cs" />
+    <Compile Include="Editor\EditorTab.cs" />
+    <Compile Include="Group Object\eTransformType.cs" />
+    <Compile Include="Group Object\Compile.cs" />
+    <Compile Include="Group Object\GetChildGroup.cs" />
+    <Compile Include="Group Object\Add.cs" />
+    <Compile Include="Group Object\Translate.cs" />
+    <Compile Include="Group Object\Rotate.cs" />
+    <Compile Include="Group Object\stub.cs" />
+    <Compile Include="Group Object\Properties.cs" />
+    <Compile Include="Group Object\GetProperties.cs" />
+    <Compile Include="Group Object\LoadProperties.cs" />
+    <Compile Include="Base Classes\CompilableRoot.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\Stub.cs" />
+    <Compile Include="PolygonEdge\BuildPolygon.cs" />
+    <Compile Include="PolygonEdge\Constructor.cs" />
+    <Compile Include="PolygonEdge\ConvertFromPEdge.cs" />
+    <Compile Include="PolygonEdge\ConvertToPEdge.cs" />
+    <Compile Include="PolygonEdge\FindInsideIntersectionPoint.cs" />
+    <Compile Include="PolygonEdge\FindInterSectionPolygons.cs" />
+    <Compile Include="PolygonEdge\FindUnionPolygons.cs" />
+    <Compile Include="PolygonEdge\GetHoleCoordinates.cs" />
+    <Compile Include="PolygonEdge\GetProportionalPoint.cs" />
+    <Compile Include="PolygonEdge\IsPointInsidePolygon.cs" />
+    <Compile Include="PolygonEdge\OrderAndLink.cs" />
+    <Compile Include="PolygonEdge\Properties.cs" />
+    <Compile Include="PolygonEdge\RecursivelySplit.cs" />
+    <Compile Include="PolygonEdge\SameEndPoints.cs" />
+    <Compile Include="PolygonEdge\SplitEdgesAtIntersection.cs" />
+    <Compile Include="PolygonEdge\FromBoundaryPolygon.cs" />
+    <Compile Include="PolygonEdge\HasCommonEndPoint.cs" />
+    <Compile Include="PolygonEdge\ToString.cs" />
+    <Compile Include="PolygonEdge\CopyList.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMExtractRooms\Constructor.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMExtractRooms\InterSectionHolder.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMExtractRooms\stub1 - Copy.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMExtractRooms\stub1.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMExtractRooms\Properties.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMLevelInfo.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMOpenArea.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\Properties.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\Constructor.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\AddWallSegments.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\AddOpenArea.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\FindRooms.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\stub.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\AddCurrentEdgeListToRoomList.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\AddRoomsForEdge.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\Constructor.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\GetEdgesByAngle.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\OrderByAngle.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\Properties.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\Recurse.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\SupportRoutines.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomFinder\PotentialRoomStub.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoom.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMRoomEdge.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Constructor.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\GetFloorMaker.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMWorkBench\GetFloorMaker.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Properties.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\ProcessChildPolygons.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\MergeList.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Process.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\CreateRooms.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\ExtractRooms.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Clip.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\CompletelySurroundsOrOutside.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Intersects.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\CreateUnion.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\CombineComponents.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\HelperClasses\NRMEdgeList\SplitAgainst.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\GetSimpleLayout.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Dump.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\AddWalls.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\EdgeConnectsTo.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\IsEdgeInsideCurrentInput.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\Stage1.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\RetrieveOuterMostEdges.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\AddChild.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\GetAllRoomsAndOpenAreas.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\AddAllRoomEdges.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\GetRoomsAndOpenAreasForLevel.cs" />
+    <Compile Include="Template Objects\User0\NestedRoomMaker\stub.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\FloorLayoutInput\FloorLayoutInput.AddPolygon.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\FloorLayoutInput\FloorLayoutInput.Constructor.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\FloorLayoutInput\FloorLayoutInput.Properties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\FloorLayoutInput\FloorLayoutInput.GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMDestinationRoom\FloorLayoutInput\FloorLayoutInput.LoadProperties.cs" />
+    <Compile Include="Base Classes\LineSegment.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\GetConsecutiveEdgeList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\SplitEdgeInConsecutiveList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\SplitEdge.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.AddRectangle.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.AddPolygon.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.GetHoleAsPolygon.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.GetRectangle.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.GetProperties.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.Constructor.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.Properties.cs" />
+    <Compile Include="Template Objects\User0\SingleHoleGroup\SingleHoleGroup.GetPolygon.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.Properties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.GetDoorCandidates.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.NextIndex.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMAssembledRoom\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMAssembledRoom\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMEdge\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMEdge\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.SplitEdge.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMEdge\FMEdge.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FMAssembledRoom\GetEdgeList.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\FloorMaker.Compile.cs" />
+    <Compile Include="Template Objects\User0\FloorMaker\stub.cs" />
+    <Compile Include="Template Objects\User0\GearBase\EditorTabList.cs" />
+    <Compile Include="Template Objects\User0\GearBase\GearBase.constructor.cs" />
+    <Compile Include="Template Objects\User0\GearBase\GearBase.properties.cs" />
+    <Compile Include="Class Properties Only For Export\Hole.cs" />
+    <Compile Include="Class Properties Only For Export\HoleContainer.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\FlatMesh.Compile.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\FlatMesh.LoadProperties.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\FlatMesh.GetProperties.cs" />
+    <Compile Include="Template Objects\User0\GearBase\Compile.cs" />
+    <Compile Include="Template Objects\User0\GearBase\GetSampleList.cs" />
+    <Compile Include="Template Objects\User0\GearBase\GetJSON.cs" />
+    <Compile Include="Template Objects\User0\GearBase\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\GearBase\LoadJSON.cs" />
+    <Compile Include="Template Objects\User0\GearBase\LoadProperties.cs" />
+    <Compile Include="Class Properties Only For Export\BoundaryEllipse.cs" />
+    <Compile Include="Class Properties Only For Export\Point2DContainer.cs" />
+    <Compile Include="Class Properties Only For Export\BoundaryPolygon.cs" />
+    <Compile Include="Class Properties Only For Export\BoundaryRectangle.cs" />
+    <Compile Include="Class Properties Only For Export\SimpleLayout.HoleGroup.cs" />
+    <Compile Include="Class Properties Only For Export\JSONDataCarriage.cs" />
+    <Compile Include="Class Properties Only For Export\JSONDataTrain.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\Compile.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\EditorTabList.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridContainer\Properties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridContainer\Constructor.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridContainer\AddCell.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridContainer\GetLeaves.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridContainer\Recurse.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\Properties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\Constructor.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\AddCell.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\AddBox.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\GetCellOffsetAndSize.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\stub.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElementPlan\GetSizeAndIterations.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElement\GetBoxOffsetAndSize.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\GridElement\Properties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\ParseOffsetAndSize\Decode.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\ParseOffsetAndSize\GetHeight.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\ParseOffsetAndSize\GetWidth.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\ParseOffsetAndSize\Constructor.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GridComponents\ParseOffsetAndSize\Properties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GetJSON.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\HolePlacementTemplate.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\LoadJSON.cs" />
+    <Compile Include="Template Objects\User0\HolePlacement\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\SimpleLayout.HoleGroup.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\SimpleLayout.LayoutHole.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\Properties.cs" />
+    <Compile Include="Class Properties Only For Export\SimpleLayout.Edge.cs" />
+    <Compile Include="Class Properties Only For Export\Point2D.cs" />
+    <Compile Include="Base Classes\BoundaryEllipse.cs" />
+    <Compile Include="Base Classes\BoundaryPolygon.cs" />
+    <Compile Include="Base Classes\BoundaryRectangle.cs" />
+    <Compile Include="Base Classes\BoundaryRoot.cs" />
+    <Compile Include="Base Classes\ICompile.cs" />
+    <Compile Include="Base Classes\ILoadAndSaveProperties.cs" />
+    <Compile Include="Base Classes\Point2D.cs" />
+    <Compile Include="Base Classes\Utilities.cs" />
+    <Compile Include="Class Properties Only For Export\Point3D.cs" />
+    <Compile Include="Class Properties Only For Export\SimpleLayout.LayoutHole.cs" />
+    <Compile Include="Class Properties Only For Export\SimpleLayout.HorizontalPanel.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\EdgeLength.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\GetConnectedEdges.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\Helper.AddRectangleToHoldGroup.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\GetEdgeList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\Constructor.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\Constructors.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\EditorTabList.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\Properties.cs" />
+    <Compile Include="Class Properties Only For Export\SimpleLayout.Vertex.cs" />
+    <Compile Include="Documentation\ItemDoc\GetBasicShapeClasses.cs" />
+    <Compile Include="Documentation\ItemDoc\GetDataClasses.cs" />
+    <Compile Include="Documentation\ItemDoc\GetEnumerations.cs" />
+    <Compile Include="Documentation\ItemDoc\GetExposedItems.cs" />
+    <Compile Include="Documentation\ItemDoc\GetMarkedClass.cs" />
+    <Compile Include="Documentation\ItemDoc\GetMarkedClasses.cs" />
+    <Compile Include="Documentation\ItemDoc\GetTemplateClasses.cs" />
+    <Compile Include="Documentation\ItemDoc\ItemDoc.cs" />
+    <Compile Include="Documentation\ItemDoc\ItemDoc.EnumerationDoc.cs" />
+    <Compile Include="Documentation\ItemDoc\ItemDoc.XMLStructure.cs" />
+    <Compile Include="Documentation\ItemDoc\Properties.cs" />
+    <Compile Include="Documentation\ItemDoc\stub.cs" />
+    <Compile Include="Documentation\PropertyDoc.cs" />
+    <Compile Include="Documentation\SampleInstance.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\FlatMesh.Properties.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\FlatMesh.GetSampleList.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\Panel.ConnectedHole.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\Panel.cs" />
+    <Compile Include="Mesh Objects\BasicShapes\Panel.GetSampleList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Base Classes\MeshDisplayProperties.cs" />
+    <Compile Include="Base Classes\TransformableRoot.cs" />
+    <Compile Include="Base Classes\Point3D.cs" />
+    <Compile Include="Base Classes\Vector3D.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\GetSampleList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.EllipseList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.PolygonList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\Compile.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\JSON_IO.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.HorizontalPanelList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.VertexList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.EdgeList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.HoleGroupList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\XProperties.RectangleList.cs" />
+    <Compile Include="Template Objects\User0\SimpleLayout\stub.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\JSON_IO.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\Compile.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\GetSampleList.cs" />
+    <Compile Include="Template Objects\User0\SingleRoomBuilding\stub.cs" />
+    <Compile Include="Template Objects\User0\BuildingWithWalls\BuildingWithWallsTemplate.cs" />
+    <Compile Include="Template Objects\User0\BuildingWithWalls\BuildingShellTemplate.cs" />
+    <Compile Include="Template Objects\User0\BuildingWithWalls\StairWellTemplate.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\Compile.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\EditorTabList.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\LoadJSON.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\GetJSON.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\LoadProperties.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\Properties.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\GetSampleList.cs" />
+    <Compile Include="Template Objects\User0\StraightStairs\SingleStair.cs" />
+    <Compile Include="Template Objects\User0\StraightStarsWithRunList\Compile.cs" />
+    <Compile Include="Template Objects\User0\StraightStarsWithRunList\Properties.cs" />
+    <Compile Include="Template Objects\User0\StraightStarsWithRunList\SingleStair.cs" />
+    <Compile Include="Templates\Compile.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EditorTabList.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\GetJSON.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\GetProperties.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LoadJSON.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\LoadProperties.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\TestTemplateClass.cs">
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Class Properties Only For Export\ReadMe.txt" />
+    <Content Include="Templates\Wireframe.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Wireframe.txt</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Wireframe.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wireframe.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

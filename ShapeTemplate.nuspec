@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Meshola.Library.ShapeTemplateLib</id>
+    <version>1.5.1</version>
+    <description>The ShapeTemplateLib is a .NET library for accessing the Meshola API to generate meshes.</description>
+    <title>Shape Template Library</title>
+    <authors>John Mott</authors>
+    <owners>John Mott</owners>
+    <packageTypes>
+        <packageType name="Dependency" />
+    </packageTypes>
+
+    <licenseUrl>http://unlicense.org/</licenseUrl>
+    <projectUrl>https://github.com/johnmott59/ShapeTemplate</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+   
+    <releaseNotes>
+Latest version Jan 28, 2018
+This version is intended only for prototyping and testing. The project is still in active development
+and there will be frequent breaking changes.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>3dMesh </tags>
+  </metadata>
+</package>

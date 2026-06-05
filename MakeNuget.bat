@@ -1,0 +1,1 @@
+nuget pack shapetemplatelib.csproj -Prop Platform=AnyCPU

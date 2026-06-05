@@ -1,0 +1,25 @@
+---------------- G I T
+
+use svn to update the project in git, adding or updating files
+
+
+
+--------------- N U G E T 
+
+set the version number (last was 1.3 in Jan 2018) in the project assembly properties
+
+run makenuget.bat to generate the 'nupkg
+
+sign in to nuget.org
+
+	username johnmott59
+	pw: Ekeeper59
+	email is johnmott@comcast.net
+
+go to upload
+
+	https://www.nuget.org/packages/manage/upload
+
+	drop the .nupkg into the page to upload it
+
+after uploading, hide the old version
