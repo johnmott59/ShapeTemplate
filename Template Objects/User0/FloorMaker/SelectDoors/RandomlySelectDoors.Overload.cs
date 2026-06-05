@@ -20,13 +20,20 @@ namespace ShapeTemplateLib.Templates.User0
             // Build a candidate list from all assembled rooms
             List<FMEdge> candidateList = new List<FMEdge>();
 
-            if (AssembledRoomList != null)
+            if (AssembledRoomList != null && AssembledRoomList.Length > 0)
             {
                 foreach (var room in AssembledRoomList)
                 {
                     var candidates = GetDoorCandidates(room);
                     candidateList.AddRange(candidates);
                 }
+            }
+            else
+            {
+                // No rooms to process - this might happen if the floor layout generation failed
+                // or if the input didn't define any rooms properly
+                // Just return without doing anything rather than passing empty list
+                return;
             }
 
             // Call the existing method with the generated candidate list

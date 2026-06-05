@@ -83,7 +83,8 @@ namespace ShapeTemplateLib.Templates.User0
         {
             message = "OK";
 
-            XElement XList = Utilities.GetListElement(Xele, "roomlist");
+            // Use the same name as GetProperties - "assembledroomlist"
+            XElement XList = Utilities.GetListElement(Xele, nameof(AssembledRoomList).ToLower());
 
             // ok if there are no items
             if (XList == null) return true;
