@@ -17,26 +17,41 @@ namespace ShapeTemplateLib.Templates.User0
         /// </summary>
         public void RandomlySelectDoors()
         {
+            System.Diagnostics.Debug.WriteLine("");
+            System.Diagnostics.Debug.WriteLine("RandomlySelectDoors() - Building candidate list...");
+
             // Build a candidate list from all assembled rooms
             List<FMEdge> candidateList = new List<FMEdge>();
 
             if (AssembledRoomList != null && AssembledRoomList.Length > 0)
             {
-                foreach (var room in AssembledRoomList)
+                System.Diagnostics.Debug.WriteLine($"  Checking {AssembledRoomList.Length} rooms for door candidates...");
+
+                for (int i = 0; i < AssembledRoomList.Length; i++)
                 {
+                    var room = AssembledRoomList[i];
                     var candidates = GetDoorCandidates(room);
+                    System.Diagnostics.Debug.WriteLine($"  Room {i}: {candidates.Count} door candidates found");
+
+                    foreach (var edge in candidates)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"    - Edge {edge.Index}: InteriorDoorCandidate={edge.InteriorDoorCandidate}, ExteriorWindowCandidate={edge.ExteriorWindowCandidate}");
+                    }
+
                     candidateList.AddRange(candidates);
                 }
+
+                System.Diagnostics.Debug.WriteLine($"  Total candidates collected: {candidateList.Count}");
             }
             else
             {
-                // No rooms to process - this might happen if the floor layout generation failed
-                // or if the input didn't define any rooms properly
-                // Just return without doing anything rather than passing empty list
+                System.Diagnostics.Debug.WriteLine("  WARNING: No rooms to process!");
                 return;
             }
 
             // Call the existing method with the generated candidate list
+            System.Diagnostics.Debug.WriteLine("");
+            System.Diagnostics.Debug.WriteLine($"Calling RandomlySelectDoors(candidateList) with {candidateList.Count} candidates...");
             RandomlySelectDoors(candidateList);
         }
     }

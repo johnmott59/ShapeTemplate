@@ -23,7 +23,7 @@ namespace ShapeTemplateLib.Templates.User0
             SimpleLayout oSimpleLayout = new SimpleLayout();
             oSimpleLayout.HorizontalScale = HorizontalScale;
             oSimpleLayout.VerticalScale = VerticalScale;
-            
+
             // pass down the location information
             oSimpleLayout.oFrameOfReference = this.oFrameOfReference;
             oSimpleLayout.LocalTransform = this.LocalTransform;
@@ -43,6 +43,45 @@ namespace ShapeTemplateLib.Templates.User0
                         ID = edge.ID,
                         HoleGroupID = edge.HoleGroupID
                     });
+            }
+
+            // Create default HoleGroup definitions for any HoleGroupIDs used by edges
+            var usedHoleGroupIds = EdgeList.Where(e => !string.IsNullOrEmpty(e.HoleGroupID))
+                                           .Select(e => e.HoleGroupID)
+                                           .Distinct()
+                                           .ToList();
+
+            foreach (var holeGroupId in usedHoleGroupIds)
+            {
+                // Add a default rectangular boundary for the door opening (3 feet wide x 7 feet tall)
+                var doorRect = new BoundaryRectangle()
+                {
+                    Width = 36,   // 3 feet
+                    Height = 84,  // 7 feet
+                    ZDepth = 0
+                };
+                oSimpleLayout.BoundaryRectangleList.Add(doorRect);
+                int rectIndex = oSimpleLayout.BoundaryRectangleList.Count - 1;
+
+                // Create a hole that references the boundary rectangle
+                // The hole is centered horizontally on the wall and starts at floor level
+                var doorHole = new LayoutHole()
+                {
+                    HoleType = "rect",
+                    HoleTypeIndex = rectIndex,
+                    OffsetX = -18,  // Center the 36" door (half of 36)
+                    OffsetY = 0     // At floor level
+                };
+
+                var holeGroup = new HoleGroup()
+                {
+                    HoleGroupID = holeGroupId,
+                    HoleList = new LayoutHole[] { doorHole }
+                };
+
+                oSimpleLayout.HoleGroupList.Add(holeGroup);
+
+                System.Diagnostics.Debug.WriteLine($"Created HoleGroup '{holeGroupId}' with 36\"x84\" door opening");
             }
 
             return oSimpleLayout;

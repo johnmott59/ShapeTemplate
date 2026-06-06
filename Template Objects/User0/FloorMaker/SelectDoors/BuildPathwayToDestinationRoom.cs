@@ -47,24 +47,36 @@ namespace ShapeTemplateLib.Templates.User0
                     }
                 }
 
-                // if there were no common edges the room encloses the open area. In that case pick one of the edges of the 
+                // if there were no common edges the room encloses the open area. In that case pick one of the edges of the
                 // open area for a door.
 
                 int ndx = 0;
 
                 if (CommonEdgeList.Count == 0)
                 {
-                    // pick an edge in the open aera
-                    ndx = dRoom.EdgeIndexList[0];
+                    // Randomly pick an edge in the open area
+                    int randomIndex = FloorMaker._doorRandom.Next(dRoom.EdgeIndexList.Length);
+                    ndx = dRoom.EdgeIndexList[randomIndex];
+                    System.Diagnostics.Debug.WriteLine($"  Room encloses open area - randomly selected edge {ndx} from {dRoom.EdgeIndexList.Length} open area edges (index {randomIndex})");
                 }
                 else
                 {
-                    // Of the edges that connect to the open area, pick 1
-                    ndx = CommonEdgeList[0];
+                    // Of the edges that connect to the open area, randomly pick 1
+                    int randomIndex = FloorMaker._doorRandom.Next(CommonEdgeList.Count);
+                    ndx = CommonEdgeList[randomIndex];
+                    System.Diagnostics.Debug.WriteLine($"  Randomly selected edge {ndx} from {CommonEdgeList.Count} common edges (index {randomIndex})");
                 }
 
-                // add this edge to the list of candidates for a doorway
+                // Select this edge as a doorway and assign HoleGroupID
                 FMEdge f = this.EdgeList[ndx];
+
+                // Assign HoleGroupID to actually mark this as a door!
+                if (string.IsNullOrEmpty(f.HoleGroupID))
+                {
+                    f.HoleGroupID = "door";  // Use a default door pattern
+                    System.Diagnostics.Debug.WriteLine($"  -> Assigned HoleGroupID='door' to Edge {f.Index}");
+                }
+
                 if (!FMEdgeCandidateList.Contains(f)) FMEdgeCandidateList.Add(f);
 
                 // Mark this room as being connected to the open area. Once its connected it doesn't require a second
