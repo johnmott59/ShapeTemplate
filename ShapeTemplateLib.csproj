@@ -65,6 +65,14 @@
     <Compile Include="Class Properties Only For Export\LineSegment.cs" />
     <Compile Include="Class Properties Only For Export\OffsetAndSize.cs" />
     <Compile Include="PolygonEdge\IsParallel.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\Compile.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\EditorTabList.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\FloorWithRooms.constructor.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\FloorWithRooms.properties.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\GetJSON.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\GetProperties.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\LoadJSON.cs" />
+    <Compile Include="Template Objects\User0\FloorWithRooms\LoadProperties.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\GetEdgeList.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\GetProperties.cs" />
     <Compile Include="Template Objects\User0\FloorMaker\FMOuterRoom\LoadProperties.cs" />
